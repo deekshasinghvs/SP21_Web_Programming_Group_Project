@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: May 24, 2021 at 10:25 AM
+-- Generation Time: May 24, 2021 at 12:39 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -111,7 +111,7 @@ CREATE TABLE `contactus` (
   `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `customerId` int(11) NOT NULL,
+  `customerId` int(11) DEFAULT NULL,
   `message` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -145,7 +145,7 @@ CREATE TABLE `customers` (
   `city` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(3) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `username` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `passwordencrypted` varchar(42) COLLATE utf8_unicode_ci DEFAULT NULL,
   `isAdmin` tinyint(1) NOT NULL DEFAULT '0',
   `emailVerified` tinyint(1) NOT NULL DEFAULT '0',
@@ -154,7 +154,8 @@ CREATE TABLE `customers` (
   `lastOnline` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `referralCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `referredBy` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `dataStoragePermission` tinyint(1) NOT NULL DEFAULT '0'
+  `dataStoragePermission` tinyint(1) NOT NULL DEFAULT '0',
+  `dob` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -356,7 +357,8 @@ ALTER TABLE `customerdiscounts`
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `discounts`

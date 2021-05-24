@@ -3,7 +3,7 @@
  $_REQUEST["to"] with the email address of the receiver
  $_REQUEST["message"] with the HTML email message body
  $_REQUEST["subject"] with the subject line of the email to be sent
- -->
+ --> 
  <!-- Source: https://www.tutorialspoint.com/php/php_sending_emails.htm -->
 <html>
    <head>
