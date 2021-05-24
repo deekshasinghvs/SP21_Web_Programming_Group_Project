@@ -2,7 +2,7 @@
 $user='root';
 $pass='root';
 $host='localhost';
-$db = 'DB';
+$db = 'bookstore';
 $db_port = 3307;
 
 
