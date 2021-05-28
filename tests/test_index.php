@@ -22,7 +22,7 @@ include "../debug/chromephp-master/ChromePhp.php";
     <link href="../bootstrap/dashboard.css" rel="stylesheet">
 
     <!-- Add ajax files -->
-    <script src="ajax/ajax_inserts.js"></script>
+    <script src="ajax/ajax.js"></script>
     <script>
 // =====================================================
 // JS functions for inserting a row to the database
@@ -55,6 +55,18 @@ include "../debug/chromephp-master/ChromePhp.php";
         // Calls below function in the ajax/ajax_inserts.js file 
         update_cart(data); 
     }
+
+// ======================================================
+// JS functions for selecting rows from the database 
+// =======================================================
+    function select_from_cart(customerid)
+        {                        
+            var data = {"customerid": customerid};
+
+            // Calls below function in the ajax/ajax_inserts.js file 
+            show_cart(data); 
+        }
+
     </script>
   </head>
 <body>
@@ -79,22 +91,21 @@ include "../debug/chromephp-master/ChromePhp.php";
     $bookid = "1234567891012";
     $bookid_json = "'1234567891012'";
     $customerid = "1";
-    $customerid_json = "1";
-
+    
     print "<h3>Via Button with pre-defined values</h3>
             <p>Existing bookid = $bookid</p>
             <p>Existing customerid = $customerid</p>
             <form>
         	    Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookid}_quantity_insert\" value=\"1\"><br>
             </form>
-            <button onclick=\"add_to_cart($customerid_json , $bookid_json )\">Submit</button>";
+            <button onclick=\"add_to_cart($customerid , $bookid_json )\">Submit</button>";
     
     echo "<p id=\"add_to_cart_response\"></p>";
    ?>
 
     <h1>Testing - Update</h1>
 
-    <!-- ==== Testing component inserts ==== 
+    <!-- ==== Testing components - update ==== 
     ======================================== --> 
     <?php
     print "<h1>Update Database Tables</h1>";
@@ -103,7 +114,6 @@ include "../debug/chromephp-master/ChromePhp.php";
     $bookid = "1234567891012";
     $bookid_json = "'1234567891012'";
     $customerid = "1";
-    $customerid_json = "1";
 
     print "<h3>Via Button with pre-defined values</h3>
             <p>Existing bookid = $bookid</p>
@@ -111,11 +121,34 @@ include "../debug/chromephp-master/ChromePhp.php";
             <form>
                 New Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookid}_quantity_update\" value=\"1\"><br>
             </form>
-            <button onclick=\"update_in_cart($customerid_json , $bookid_json )\">Submit</button>";
+            <button onclick=\"update_in_cart($customerid, $bookid_json )\">Submit</button>";
 
     echo "<p id=\"update_in_cart_response\"></p>";
 
 ?>
+
+
+    <h1>Testing - Select</h1>
+
+    <!-- ==== Testing components - select ==== 
+    ======================================== --> 
+    <?php
+    print "<h1>Select Database Tables</h1>";
+    echo "<h2>Table: Cart</h2>";
+
+    $customerid = "1";
+ 
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing customerid = $customerid</p>
+            <button onclick=\"select_from_cart($customerid)\">Submit</button>";
+
+    echo "<p id=\"select_from_cart_response\"></p>";
+
+    ?>
+
+
+
+
 
 
     <!-- Bootstrap core JavaScript
