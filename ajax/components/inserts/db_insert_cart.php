@@ -70,10 +70,10 @@ $stmt->bind_param("isi", $customerid, $bookid, $quantity);
 $stmt->execute();
 
 // get the id of the insert
-$cart_id = $mysqli->insert_id;
+$insert_id = $mysqli->insert_id;
 
 // REMOVE - TO DO 🔲
-ChromePhp::log("Added to cart: cart_id=$cart_id");
+ChromePhp::log("Added to cart: cart_id=$insert_id");
 
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
@@ -81,7 +81,7 @@ if ($stmt->error == "")
     $response->response_code = "success";
 }
 
-$response->response = "$cart_id";
+$response->response = "$insert_id";
 $cart_insert_output_response = json_encode($response);
 
 // REMOVE - TO DO 🔲

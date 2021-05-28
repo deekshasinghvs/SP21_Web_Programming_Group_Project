@@ -23,25 +23,42 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     <!-- Add ajax files -->
     <script src="ajax/ajax_inserts.js"></script>
-
     <script>
-        function add_to_cart(customerid, bookid)
-        {
+// =====================================================
+// JS functions for inserting a row to the database
+// ===================================================== 
+    function add_to_cart(customerid, bookid)
+    {
+        var quantity_id = bookid.substring(0,14) + "_quantity_insert";           
+        var quantity = parseInt($("#" + quantity_id).val());
+                                
+        var data = {"customerid": customerid, 
+                    "bookid": bookid,
+                    "quantity": quantity
+                    };
+        // Calls below function in the ajax/ajax_inserts.js file
+        add_cart(data); 
+    }
 
-            var quantity_id = bookid.substring(0,14) + "_quantity";           
-            var quantity = parseInt($("#" + quantity_id).val());
-                                    
-            var data = {"customerid": customerid, 
-                        "bookid": bookid,
-                        "quantity": quantity
-                       };
-                       
-            add_cart(data); 
-        }
+// ======================================================
+// JS functions for updating a row in the databse 
+// =======================================================
+    function update_in_cart(customerid, bookid)
+    {
+        var quantity_id = bookid.substring(0,14) + "_quantity_update";           
+        var quantity = parseInt($("#" + quantity_id).val());
+                                
+        var data = {"customerid": customerid, 
+                    "bookid": bookid,
+                    "quantity": quantity
+                    };
+        // Calls below function in the ajax/ajax_inserts.js file 
+        update_cart(data); 
+    }
     </script>
   </head>
 <body>
-    <h1> testing index</h1>
+    <h1>Testing - Insert</h1>
 
     <!-- ==== Testing component inserts ==== 
     ======================================== --> 
@@ -59,7 +76,29 @@ include "../debug/chromephp-master/ChromePhp.php";
         //         <input type=\"submit\">
         //   </form>
 
-    ChromePhp::log("\nline 62");
+    $bookid = "1234567891012";
+    $bookid_json = "'1234567891012'";
+    $customerid = "1";
+    $customerid_json = "1";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing bookid = $bookid</p>
+            <p>Existing customerid = $customerid</p>
+            <form>
+        	    Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookid}_quantity_insert\" value=\"1\"><br>
+            </form>
+            <button onclick=\"add_to_cart($customerid_json , $bookid_json )\">Submit</button>";
+    
+    echo "<p id=\"add_to_cart_response\"></p>";
+   ?>
+
+    <h1>Testing - Update</h1>
+
+    <!-- ==== Testing component inserts ==== 
+    ======================================== --> 
+    <?php
+    print "<h1>Update Database Tables</h1>";
+    echo "<h2>Table: Cart</h2>";
 
     $bookid = "1234567891012";
     $bookid_json = "'1234567891012'";
@@ -67,19 +106,16 @@ include "../debug/chromephp-master/ChromePhp.php";
     $customerid_json = "1";
 
     print "<h3>Via Button with pre-defined values</h3>
-            <p>bookid = $bookid</p>
-            <p>customerid = $customerid</p>
+            <p>Existing bookid = $bookid</p>
+            <p>Existing customerid = $customerid</p>
             <form>
-        	    Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookid}_quantity\" value=\"1\"><br>
+                New Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookid}_quantity_update\" value=\"1\"><br>
             </form>
-            <button onclick=\"add_to_cart($customerid_json , $bookid_json )\">Submit</button>";
-    
-    ChromePhp::log("\n69");
-    
-    echo "<p id=\"add_to_cart_response\">hello</p>";
-    
-    ChromePhp::log("\n76");
-   ?>
+            <button onclick=\"update_in_cart($customerid_json , $bookid_json )\">Submit</button>";
+
+    echo "<p id=\"update_in_cart_response\"></p>";
+
+?>
 
 
     <!-- Bootstrap core JavaScript
