@@ -36,13 +36,26 @@ include "../debug/chromephp-master/ChromePhp.php";
                     "bookid": bookid,
                     "quantity": quantity
                     };
-        // Calls below function in the ajax/ajax_inserts.js file
+        // Calls below function in the ajax/ajax.js file
         add_cart(data); 
+    }
+
+
+    function add_to_category()
+    {
+        var category_id = "category_insert";           
+        var category = $("#" + category_id).val();
+                                
+        var data = {"name": category};
+
+        // Calls below function in the ajax/ajax.js file
+        add_category(data); 
     }
 
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
+
     function update_in_cart(customerid, bookid)
     {
         var quantity_id = bookid.substring(0,14) + "_quantity_update";           
@@ -52,8 +65,19 @@ include "../debug/chromephp-master/ChromePhp.php";
                     "bookid": bookid,
                     "quantity": quantity
                     };
-        // Calls below function in the ajax/ajax_inserts.js file 
+        // Calls below function in the ajax/ajax.js file 
         update_cart(data); 
+    }
+
+    function update_in_category(id)
+    {
+        var name = $("#category_name_update").val();
+                                
+        var data = {"id": parseInt(id), 
+                    "name": name
+                    };
+        // Calls below function in the ajax/ajax.js file 
+        update_category(data); 
     }
 
 // ======================================================
@@ -63,8 +87,16 @@ include "../debug/chromephp-master/ChromePhp.php";
         {                        
             var data = {"customerid": customerid};
 
-            // Calls below function in the ajax/ajax_inserts.js file 
+            // Calls below function in the ajax/ajax.js file 
             show_cart(data); 
+        }
+
+    function select_from_category(id)
+        {                        
+            var data = {"id": parseInt(id)};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_category(data); 
         }
 
     </script>
@@ -101,6 +133,15 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_cart($customerid , $bookid_json )\">Submit</button>";
     
     echo "<p id=\"add_to_cart_response\"></p>";
+
+    echo "<h2>Table: Category</h2>";
+    
+    print "<form>
+        	    New Category Name: <input type=\"text\" name=\"category_name\" id=\"category_insert\"><br>
+            </form>
+            <button onclick=\"add_to_category()\">Submit</button>";
+    
+    echo "<p id=\"add_to_category_response\"></p>";
    ?>
 
     <h1>Testing - Update</h1>
@@ -125,6 +166,20 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"update_in_cart_response\"></p>";
 
+
+    echo "<h2>Table: Category</h2>";
+    
+    $categoryid = 1;
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing id = $categoryid</p>
+            <form>
+                New Name: <input type=\"text\" name=\"name\" id=\"category_name_update\"><br>
+            </form>
+            <button onclick=\"update_in_category($categoryid)\">Submit</button>";
+
+    echo "<p id=\"update_in_category_response\"></p>";
+
 ?>
 
 
@@ -143,6 +198,17 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"select_from_cart($customerid)\">Submit</button>";
 
     echo "<p id=\"select_from_cart_response\"></p>";
+
+   
+    echo "<h2>Table: Category</h2>";
+    $id = 1;
+ 
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing category id = $id</p>
+            <button onclick=\"select_from_category($id)\">Submit</button>";
+
+    echo "<p id=\"select_from_category_response\"></p>";
+
 
     ?>
 

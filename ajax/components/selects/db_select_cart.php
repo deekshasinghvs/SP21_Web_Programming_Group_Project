@@ -17,7 +17,10 @@
 // cart_select_output_response = 
 //     {  
 //         "response_code": <RESPONSE CODE>,
-//         "response": <SELECTED ROWS>
+//         "response": [{"customerId": <Customer ID>,
+//                       "bookId": <book ID> , 
+//                       "quantity": <quantity>
+//                      }...]
 //     }
 
 
