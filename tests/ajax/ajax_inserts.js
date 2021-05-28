@@ -6,7 +6,7 @@ function add_cart(data)
 	$("#add_to_cart_response").append(data_encoded);
 	
 	$.ajax({
-			type: "GET",
+			type: "POST",
 			url: "../ajax/components/inserts/db_insert_cart.php",
 			data: data_encoded,
 			success: show_cart_response
