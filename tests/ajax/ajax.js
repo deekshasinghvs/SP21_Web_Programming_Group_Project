@@ -106,7 +106,7 @@ function show_cart(data)
 {
 	var data_encoded = {'cart_select_input_query':  JSON.stringify(data)};
 
-	$("#select_from_cart_response").append(data_encoded);
+	// $("#select_from_cart_response").append(data_encoded);
 	
 	$.ajax({
 			type: "POST",
@@ -121,13 +121,13 @@ function display_show_cart_response(x,y,z)
 {
 	var o = JSON.parse(JSON.parse(x).response);
 
-	$("#select_from_cart_response").html('<table class="table" id="custtable"><thead><tr><th>customerID</th><th>bookId</th><th>quantity</th></tr></thead><tbody></tbody></table>');
+	$("#select_from_cart_response").html('<table class="table" id="custtablecart"><thead><tr><th>customerID</th><th>bookId</th><th>quantity</th></tr></thead><tbody></tbody></table>');
 	
 	for(var i = 0; i < o.length; i++) 
 	{
 		var t = '<tr><td>'+ o[i].customerId +'</td><td>'+ o[i].bookId+'</td><td>'+o[i].quantity+'</td></tr>';
 
-		$('#custtable TBODY').append(t);
+		$('#custtablecart TBODY').append(t);
 
 	}
 }
@@ -137,7 +137,7 @@ function show_category(data)
 {
 	var data_encoded = {'category_select_input_query':  JSON.stringify(data)};
 
-	$("#select_from_category_response").append(data_encoded);
+	// $("#select_from_category_response").append(data_encoded);
 	
 	$.ajax({
 			type: "POST",
@@ -151,14 +151,14 @@ function show_category(data)
 function display_show_category_response(x,y,z) 
 {
 	var o = JSON.parse(JSON.parse(x).response);
-
-	$("#select_from_category_response").html('<table class="table" id="custtable"><thead><tr><th>ID</th><th>Name</th></tr></thead><tbody></tbody></table>');
+	
+	$("#select_from_category_response").html('<table class="table" id="custtablecategory"><thead><tr><th>ID</th><th>Name</th></tr></thead><tbody></tbody></table>');
 	
 	for(var i = 0; i < o.length; i++) 
 	{
 		var t = '<tr><td>'+ o[i].id +'</td><td>'+ o[i].name+'</td><td>';
 
-		$('#custtable TBODY').append(t);
+		$('#custtablecategory TBODY').append(t);
 
 	}
 }
