@@ -51,6 +51,44 @@ include "../debug/chromephp-master/ChromePhp.php";
         // Calls below function in the ajax/ajax.js file
         add_category(data); 
     }
+    function add_to_books()
+    {
+        var isbn_id = "isbn_insert";
+        var isbn = $("#"+ isbn_id).val();
+        var title_id = "title_insert";
+        var title = $("#"+title_id).val();
+        var decription_id = "description_insert";
+        var description = $("#"+ description_id).val();
+        var price_id = "price_insert";
+        var price = $("#"+ price_id).val();
+        var category_id = "category_insert";
+        var categoryId = $("#"+ category_id).val();
+        var previewLink_id = "previewLink_insert";
+        var previewLink = $("#"+ previewLink_id).val();
+        var publicationDate_id = "publicationDate_insert";
+        var publicationDate = $("#"+ publicationDate_id).val();
+        var edition_id = "edition_insert";
+        var edition = $("#"+ edition_id).val();
+        var publisher_id = "publisher_insert";
+        var publisherId = $("#"+ publisher_id).val();
+        var displayImage_id = "displayImage_insert";
+        var displayImage = $("#"+displayImage_id).val();
+        
+                                
+        var data = {"isbn": isbn, 
+                    "title": title,
+                    "description": description,
+                    "price": price,
+                    "categoryId":categoryId,
+                    "previewLink": previewLink,
+                    "publicationDate": publicationDate,
+                    "edition": edition,
+                    "publisherId":publisherId,
+                    "displayImage"= displayImage
+                    };
+        // Calls below function in the ajax/ajax.js file
+        add_books(data); 
+    }
 
 // ======================================================
 // JS functions for updating a row in the databse 
@@ -142,6 +180,31 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_category()\">Submit</button>";
     
     echo "<p id=\"add_to_category_response\"></p>";
+
+    echo "<h2>Table: Books</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Book_ISBN</label>
+             <input type=\"text\" name=\"isbn\"><br>
+             <label>Book_Title</label>
+             <input type=\"text\" name=\"title\"><br>
+             <label>Book_Description</label>
+             <input type=\"text" name=\"description\"><br>
+             <label>Book_Price</label>
+             <input type=\"number\" name=\"price\" step=\".01\"><br>
+             <label>Book_Preview</label>
+             <input type=\"text\" name=\"previewLink\"><br>
+             <label>Book_Publication_Date</label>
+             <input type=\"date\" name=\"publicationDate\"><br>
+             <label>Book_Edition</label>
+             <input type=\"number\" name=\"edition\"><br>
+             <label>Book_Image</label>
+             <input type=\"text\" name=\"displayImage\"><br>
+             <input type=\"Submit\" name=\"Add\"/><br>
+            </form>
+            <button onclick=\"add_to_books($categoryId, $publisherId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_books_response\"></p>";
    ?>
 
     <h1>Testing - Update</h1>

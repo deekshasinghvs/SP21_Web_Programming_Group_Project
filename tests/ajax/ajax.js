@@ -48,6 +48,27 @@ function display_add_category_response(x,y,z)
 	$("#add_to_category_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
+function add_books(data)  
+{
+	var data_encoded = {'books_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_books_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_books.php",
+			data: data_encoded,
+			success: display_add_books_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_books_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_books_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
 
 // ======================================================
 // AJAX functions for updating in database, via POST/GET to the corresponding PHP files
