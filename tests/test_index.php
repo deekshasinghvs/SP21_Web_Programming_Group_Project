@@ -87,6 +87,44 @@ include "../debug/chromephp-master/ChromePhp.php";
         add_books(data); 
     }
 
+    function add_to_orders(Id, customerId)
+    {
+        var orderDate_id = "orderDate_insert";
+        var orderDate = $("#" + orderDate_id).val();
+        var status_id = "status_insert";
+        var status = $("#" + status_id).val();
+        var extraDetails_id = "extraDetails_insert";
+        var extraDetails = $("#" + extraDetails_id).val();
+        var promoCode_id = "promoCode_insert";
+        var promoCode = $("#" + promoCode_id).val();
+        var paymentMethod_id = "paymentMethod_insert";
+        var paymentMethod = $("#" + paymentMethod_id).val();
+        var totalPrice_id = "totalPrice_insert";
+        var totalPrice = $("#" + totalPrice_id).val();
+        var discount_id = "discount_insert";
+        var discount = $("#" + discount_id).val();
+        var finalPrice_id = "finalPrice_insert";
+        var finalPrice = $("#" + finalPrice_id).val();
+        var currency_id = "currency_insert";
+        var currency = $("#" + currency_id).val();
+        
+                                
+        var data = {"id": id,
+                    "customerId": customerId,
+                    "orderDate": orderDate, 
+                    "status": status,
+                    "extraDetails": extraDetails,
+                    "promoCode": promoCode,
+                    "paymentMethod":paymentMethod,
+                    "totalPrice": totalPrice,
+                    "discount": discount,
+                    "finalPrice": finalPrice,  
+                    "currency": currency
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_orders(data); 
+    }
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
@@ -204,6 +242,37 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_books($categoryId, $publisherId)\">Submit</button>";
     
     echo "<p id=\"add_to_books_response\"></p>";
+
+    $id = "1";
+    $customerId = "1";
+    
+    echo "<h2>Table: Orders</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Orders_orderDate</label>
+             <input type=\"text\" name=\"orderDate\" id=\"orderDate_insert\"><br>
+             <label>Orders_status</label>
+             <input type=\"text\" name=\"status\" id=\"status_insert\"><br>
+             <label>Orders_extraDetails</label>
+             <input type=\"text\" name=\"extraDetails\" id= \"extraDetails_insert\"><br>
+             <label>Orders_promoCode</label>
+             <input type=\"text\" name=\"promoCode\" id=\"promoCode_insert\"><br>
+             <label>Orders_paymentMethod</label>
+             <input type=\"text\" name=\"paymentMethod\" id=\"paymentMethod_insert\"><br>
+             <label>Orders_totalPrice</label>
+             <input type=\"number\" name=\"totalPrice\" id=\"totalPrice_insert\"><br>
+             <label>Orders_discount</label>
+             <input type=\"number\" name=\"discount\" id=\"discount_insert\"><br>
+             <label>Orders_finalPrice</label>
+             <input type=\"number\" name=\"finalPrice\" id=\"finalPrice_insert\"><br>
+             <label>Orders_currency</label>
+             <input type=\"text\" name=\"currency\" id=\"currency_insert\"><br>
+
+             </form>
+            <button onclick=\"add_to_orders($id, $CustomerId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_orders_response\"></p>";
+
    ?>
 
     <h1>Testing - Update</h1>
