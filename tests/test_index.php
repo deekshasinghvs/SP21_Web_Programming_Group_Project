@@ -269,7 +269,7 @@ include "../debug/chromephp-master/ChromePhp.php";
              <input type=\"text\" name=\"currency\" id=\"currency_insert\"><br>
 
              </form>
-            <button onclick=\"add_to_orders($id, $CustomerId)\">Submit</button>";
+            <button onclick=\"add_to_orders($id, $customerId)\">Submit</button>";
     
     echo "<p id=\"add_to_orders_response\"></p>";
 
