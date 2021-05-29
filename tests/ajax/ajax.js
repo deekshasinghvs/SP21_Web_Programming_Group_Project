@@ -49,6 +49,31 @@ function display_add_category_response(x,y,z)
 }
 
 
+function add_publisher(data)  
+{
+	var data_encoded = {'publisher_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_publisher_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_publisher.php",
+			data: data_encoded,
+			success: display_add_publisher_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_publisher_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_publisher_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+
+
+
 // ======================================================
 // AJAX functions for updating in database, via POST/GET to the corresponding PHP files
 // ======================================================
@@ -96,6 +121,29 @@ function display_update_category_response(x,y,z)
 	var o = JSON.parse(x);
 
 	$("#update_in_category_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
+}
+
+
+function update_publisher(data) 
+{
+	var data_encoded = {'publisher_update_input_query':  JSON.stringify(data)};
+
+	$("#update_to_publisher_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/updates/db_update_publisher.php",
+			data: data_encoded,
+			success: display_update_publisher_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_update_publisher_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#update_in_publisher_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
 }
 
 
@@ -159,6 +207,36 @@ function display_show_category_response(x,y,z)
 		var t = '<tr><td>'+ o[i].id +'</td><td>'+ o[i].name+'</td><td>';
 
 		$('#custtablecategory TBODY').append(t);
+
+	}
+}
+
+function show_publisher(data) 
+{
+	var data_encoded = {'publisher_select_input_query':  JSON.stringify(data)};
+
+	// $("#select_from_publisher_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_publisher.php",
+			data: data_encoded,
+			success: display_show_publisher_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_publisher_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+	
+	$("#select_from_publisher_response").html('<table class="table" id="custtablepublisher"><thead><tr><th>ID</th><th>Type</th></tr></thead><tbody></tbody></table>');
+	
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = '<tr><td>'+ o[i].id +'</td><td>'+ o[i].type+'</td><td>';
+
+		$('#custtablepublisher TBODY').append(t);
 
 	}
 }

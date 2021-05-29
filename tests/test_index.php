@@ -52,6 +52,16 @@ include "../debug/chromephp-master/ChromePhp.php";
         add_category(data); 
     }
 
+    function add_to_publisher()
+    {
+        var type = $("#publisher_insert").val();
+                                
+        var data = {"type": type};
+
+        // Calls below function in the ajax/ajax.js file
+        add_publisher(data); 
+    }
+
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
@@ -80,6 +90,19 @@ include "../debug/chromephp-master/ChromePhp.php";
         update_category(data); 
     }
 
+
+    function update_in_publisher(id)
+    {
+        var type = $("#publisher_type_update").val();
+                                
+        var data = {"id": parseInt(id), 
+                    "type": type
+                    };
+
+        // Calls below function in the ajax/ajax.js file 
+        update_publisher(data); 
+    }
+
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
@@ -97,6 +120,14 @@ include "../debug/chromephp-master/ChromePhp.php";
 
             // Calls below function in the ajax/ajax.js file 
             show_category(data); 
+        }
+
+    function select_from_publisher(id)
+        {                        
+            var data = {"id": parseInt(id)};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_publisher(data); 
         }
 
     </script>
@@ -142,6 +173,15 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_category()\">Submit</button>";
     
     echo "<p id=\"add_to_category_response\"></p>";
+
+    echo "<h2>Table: Publisher</h2>";
+    
+    print "<form>
+        	    New Publisher Type: <input type=\"text\" name=\"publisher_type\" id=\"publisher_insert\"><br>
+            </form>
+            <button onclick=\"add_to_publisher()\">Submit</button>";
+    
+    echo "<p id=\"add_to_publisher_response\"></p>";
    ?>
 
     <h1>Testing - Update</h1>
@@ -166,7 +206,6 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"update_in_cart_response\"></p>";
 
-
     echo "<h2>Table: Category</h2>";
     
     $categoryid = 1;
@@ -179,6 +218,19 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"update_in_category($categoryid)\">Submit</button>";
 
     echo "<p id=\"update_in_category_response\"></p>";
+
+    echo "<h2>Table: Publisher</h2>";
+    
+    $publisherid = "2";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing id = $publisherid</p>
+            <form>
+                New Type: <input type=\"text\" name=\"type\" id=\"publisher_type_update\"><br>
+            </form>
+            <button onclick=\"update_in_publisher($publisherid)\">Submit</button>";
+
+    echo "<p id=\"update_in_publisher_response\"></p>";
 
 ?>
 
@@ -208,6 +260,16 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"select_from_category($id)\">Submit</button>";
 
     echo "<p id=\"select_from_category_response\"></p>";
+
+       
+    echo "<h2>Table: Publisher</h2>";
+    
+    $id = "2";
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing publisher id = $id</p>
+            <button onclick=\"select_from_publisher($id)\">Submit</button>";
+
+    echo "<p id=\"select_from_publisher_response\"></p>";
 
 
     ?>
