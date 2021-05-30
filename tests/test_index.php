@@ -36,6 +36,7 @@ include "../debug/chromephp-master/ChromePhp.php";
                     "bookid": bookid,
                     "quantity": quantity
                     };
+
         // Calls below function in the ajax/ajax.js file
         add_cart(data); 
     }

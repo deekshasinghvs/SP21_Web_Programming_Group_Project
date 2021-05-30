@@ -77,7 +77,7 @@ $update_id = $mysqli->update_id;
 
 // REMOVE - TO DO 🔲
 ChromePhp::log("Updated category: update_id=$update_id");
-
+$response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
 {

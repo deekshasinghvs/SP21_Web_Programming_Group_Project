@@ -72,7 +72,7 @@ $select_id = $mysqli->select_id;
 
 // REMOVE - TO DO 🔲
 ChromePhp::log("selected cart: select_id=$select_id");
-
+$response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
 {

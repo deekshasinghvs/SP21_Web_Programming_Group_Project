@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: May 24, 2021 at 12:39 PM
+-- Generation Time: May 30, 2021 at 06:03 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -13,6 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bookstore`
 --
+CREATE DATABASE IF NOT EXISTS `bookstore` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `bookstore`;
 
 -- --------------------------------------------------------
 
@@ -78,6 +80,13 @@ CREATE TABLE `books` (
   `displayImage` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`isbn`, `title`, `description`, `price`, `categoryId`, `previewLink`, `publicationDate`, `edition`, `publisherId`, `displayImage`) VALUES
+('1234567891012', 'testing book title 1', 'testing book description 1', 1, 1, 'www.example.com', '2021-05-28', 1, 1, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +99,13 @@ CREATE TABLE `cart` (
   `quantity` int(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`customerId`, `bookId`, `quantity`) VALUES
+(1, '1234567891012', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -100,6 +116,16 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'new cat name'),
+(4, 'Test category'),
+(6, 'New Cat for Testing 6'),
+(7, 'test new cat');
 
 -- --------------------------------------------------------
 
@@ -157,6 +183,13 @@ CREATE TABLE `customers` (
   `dataStoragePermission` tinyint(1) NOT NULL DEFAULT '0',
   `dob` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `email`, `firstName`, `lastName`, `postalCode`, `street`, `addessLine1`, `addressLine2`, `city`, `country`, `phone`, `username`, `passwordencrypted`, `isAdmin`, `emailVerified`, `phoneVerified`, `registrationDate`, `lastOnline`, `referralCode`, `referredBy`, `dataStoragePermission`, `dob`) VALUES
+(1, 'dsingh@ihu.edu.gr', 'Deeksha', 'Singh', 54622, 'al svolou 2', NULL, NULL, 'thessaloniki', 'GRC', NULL, 'dsingh', '12345', 1, 1, 1, '2021-05-28 18:17:17', '2021-05-28 18:17:17', '', '', 0, '2021-05-02');
 
 -- --------------------------------------------------------
 
@@ -239,6 +272,14 @@ CREATE TABLE `publisher` (
   `type` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `publisher`
+--
+
+INSERT INTO `publisher` (`id`, `type`) VALUES
+(1, 'testing publisher 1'),
+(2, 'new type');
+
 -- --------------------------------------------------------
 
 --
@@ -252,6 +293,13 @@ CREATE TABLE `ratings` (
   `customerId` int(11) NOT NULL,
   `dateUpdated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `rating`, `bookId`, `customerId`, `dateUpdated`) VALUES
+(1, 3.5, '1', 1, '2021-05-30 13:59:00');
 
 -- --------------------------------------------------------
 
@@ -442,7 +490,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `contactus`
@@ -454,7 +502,7 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `discounts`
@@ -475,16 +523,28 @@ ALTER TABLE `orderdetails`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `publisher`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `publisher`
+ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `wishlist`
+-- AUTO_INCREMENT for table `publisher`
 --
-ALTER TABLE `wishlist`
-  MODIFY `customerId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `publisher`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
