@@ -20,7 +20,7 @@ function add_cart(data)
 
 // success function - will contain HTML formatting - can be in a separate file during non-testing stages
 function display_add_cart_response(x,y,z) 
-{
+{$("#add_to_cart_response").append(x);
 	var o = JSON.parse(x);
 
 	$("#add_to_cart_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
@@ -70,6 +70,28 @@ function display_add_books_response(x,y,z)
 	$("#add_to_books_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
+function add_author(data)  
+{
+	var data_encoded = {'author_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_author_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_author.php",
+			data: data_encoded,
+			success: display_add_author_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_author_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_author_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
 // ======================================================
 // AJAX functions for updating in database, via POST/GET to the corresponding PHP files
 // ======================================================
@@ -98,28 +120,6 @@ function display_update_cart_response(x,y,z)
 
 
 function update_category(data) 
-{
-	var data_encoded = {'category_update_input_query':  JSON.stringify(data)};
-
-	$("#update_to_category_response").append(data_encoded);
-	
-	$.ajax({
-			type: "POST",
-			url: "../ajax/components/updates/db_update_category.php",
-			data: data_encoded,
-			success: display_update_category_response
-		   });
-}
-
-// success function - will contain HTML formatting - can be in a separate file during non-testing stages
-function display_update_category_response(x,y,z) 
-{
-	var o = JSON.parse(x);
-
-	$("#update_in_category_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
-}
-
-function update_books(data) 
 {
 	var data_encoded = {'category_update_input_query':  JSON.stringify(data)};
 
@@ -206,31 +206,33 @@ function display_show_category_response(x,y,z)
 	}
 }
 
-function show_books(data) 
+function show_author(data) 
 {
-	var data_encoded = {'books_select_input_query':  JSON.stringify(data)};
+	var data_encoded = {'author_select_input_query':  JSON.stringify(data)};
 
-	// $("#select_from_cart_response").append(data_encoded);
+	// $("#select_from_author_response").append(data_encoded);
 	
 	$.ajax({
 			type: "POST",
-			url: "../ajax/components/selects/db_select_books.php",
+			url: "../ajax/components/selects/db_select_author.php",
 			data: data_encoded,
-			success: display_show_books_response
+			success: display_show_author_response
 		   });
 }
+
 // success function - will contain HTML formatting - can be in a separate file during non-testing stages
-function display_show_books_response(x,y,z) 
+function display_show_author_response(x,y,z) 
 {
 	var o = JSON.parse(JSON.parse(x).response);
-
-	$("#select_from_books_response").html('<table class="table" id="custtablebooks"><thead><tr><th>isbn</th><th>title</th><th>description</th><th>price</th><th>categoryId</th><th>previewLink</th><th>publicationDate</th><th>edition</th><th>publisherId</th><th>displayImage</th></tr></thead><tbody></tbody></table>');
+	
+	$("#select_from_author_response").html('<table class="table" id="custtableauthor"><thead><tr><th>id</th><th>firstName</th><th>secondName</th></tr></thead><tbody></tbody></table>');
 	
 	for(var i = 0; i < o.length; i++) 
 	{
-		var t = '<tr><td>'+ o[i].isbn+'</td><td>'+ o[i].title+'</td><td>'+o[i].description+'</td><td>'+o[i].price+'</td><td>'+o[i].categoryId+'</td><td>'+o[i].previewLink+'</td><td>'+o[i].publicationDate+'</td><td>'+o[i].edition+'</td><td>'+o[i].publisherId+'</td><td>'+o[i].displayImage+'</td></tr>';
+		var t = '<tr><td>'+ o[i].id +'</td><td>'+ o[i].firstName+'</td><td>'+o[i].secondName+'</td><td>';
 
-		$('#custtablebooks TBODY').append(t);
+		$('#custtableauthor TBODY').append(t);
 
 	}
 }
+

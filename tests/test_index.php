@@ -96,6 +96,20 @@ include "../debug/chromephp-master/ChromePhp.php";
 
         // Calls below function in the ajax/ajax.js file
         add_books(data); 
+
+        
+    function add_to_author()
+    {
+        var firstName = $("#firstName_insert").val();
+        var secondName = $("#secondName_insert").val();
+
+        var data = {"firstName": firstName,
+                    "secondName": secondName};
+                        
+        // Calls below function in the ajax/ajax.js file
+        add_author(data); 
+    }
+
     }
 
 // ======================================================
@@ -157,14 +171,6 @@ include "../debug/chromephp-master/ChromePhp.php";
             // Calls below function in the ajax/ajax.js file 
             show_category(data); 
         }
-    function select_from_books(isbn)
-        {                        
-            var data = {"isbn": isbn};
-
-            // Calls below function in the ajax/ajax.js file 
-            show_books(data); 
-        }
-
     function select_from_publisher(id)
         {                        
             var data = {"id": parseInt(id)};
@@ -179,6 +185,13 @@ include "../debug/chromephp-master/ChromePhp.php";
 
             // Calls below function in the ajax/ajax.js file 
             show_books(data); 
+        }
+    function select_from_author(id)
+        {                        
+            var data = {"id": parseInt(id)};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_author(data);
         }
 
     </script>
@@ -261,6 +274,16 @@ include "../debug/chromephp-master/ChromePhp.php";
     
     echo "<p id=\"add_to_books_response\"></p>";
 
+    echo "<h2>Table: Author</h2>";
+    
+    print "<form>
+        	    New Author First Name: <input type=\"text\" name=\"firstName\" id=\"firstName_insert\"><br>
+                New Author Second Name: <input type=\"text\" name=\"SecondName\" id=\"SecondName_insert\"><br>
+            </form>
+            <button onclick=\"add_to_author()\">Submit</button>";
+    
+    echo "<p id=\"add_to_author_response\"></p>";
+
    ?>
 
     <h1>Testing - Update</h1>
@@ -311,26 +334,7 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"update_in_publisher_response\"></p>";
 
-    echo "<h2>Table: Books</h2>";
-    $isbn = "123456789"
-    $publisherId = "1";
-
-    print "<h3>Via Button with pre-defined values</h3>
-            <p>Existing isbn = $isbn</p>
-            <p>publisherId = $title</p> 
-            <form>
-             New Title: <input type=\"text\" name=\"title\" id=\"title_updated\"><br>
-             New Name: <input type=\"text\" name=\"description\" id=\"decription_updated\"><br>
-             New Price: <input type=\"number\" name=\"price\" step=\".01\" id=\"price_updated\"><br>
-             New Preview: <input type=\"text\" name=\"previewLink\" id=\"previewLink_updated\"><br>
-             New Publication_Date: <input type=\"date\" name=\"publicationDate\" id=\"publicationDate_updated\"><br>
-             New Edition: <input type=\"number\" name=\"edition\" id=\"edition_updated\"><br>
-             New DisplayImage: <input type=\"text\" name=\"displayImage\" id=\"displayImage_updated\"><br>
-            </form>
-            <button onclick=\"add_to_books($isbn, $publisherId)\">Submit</button>";
-
-            echo "<p id=\"update_in_books_response\"></p>";
-
+    
 ?>
 
 
@@ -370,15 +374,6 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"select_from_publisher_response\"></p>";
     
-
-    echo "<h2>Table: books</h2>";
-    $isbn = "1";
- 
-    print "<h3>Via Button with pre-defined values</h3>
-            <p>Existing isbn = $isbn</p>
-            <button onclick=\"select_from_cart($isbn)\">Submit</button>";
-
-    echo "<p id=\"select_from_books_response\"></p>";
 
     ?>
 
