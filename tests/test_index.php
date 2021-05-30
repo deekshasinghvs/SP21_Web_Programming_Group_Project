@@ -51,6 +51,17 @@ include "../debug/chromephp-master/ChromePhp.php";
         // Calls below function in the ajax/ajax.js file
         add_category(data); 
     }
+
+    function add_to_publisher()
+    {
+        var type = $("#publisher_insert").val();
+                                
+        var data = {"type": type};
+
+        // Calls below function in the ajax/ajax.js file
+        add_publisher(data); 
+    }
+
     function add_to_books(categoryId, publisherId)
     {
         var isbn_id = "isbn_insert";
@@ -115,6 +126,19 @@ include "../debug/chromephp-master/ChromePhp.php";
         update_category(data); 
     }
 
+
+    function update_in_publisher(id)
+    {
+        var type = $("#publisher_type_update").val();
+                                
+        var data = {"id": parseInt(id), 
+                    "type": type
+                    };
+
+        // Calls below function in the ajax/ajax.js file 
+        update_publisher(data); 
+    }
+
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
@@ -132,6 +156,22 @@ include "../debug/chromephp-master/ChromePhp.php";
 
             // Calls below function in the ajax/ajax.js file 
             show_category(data); 
+        }
+
+    function select_from_publisher(id)
+        {                        
+            var data = {"id": parseInt(id)};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_publisher(data); 
+        }
+
+    function select_from_books(isbn)
+        {                        
+            var data = {"isbn": isbn};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_books(data); 
         }
 
     </script>
@@ -165,7 +205,7 @@ include "../debug/chromephp-master/ChromePhp.php";
             <form>
         	    Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookid}_quantity_insert\" value=\"1\"><br>
             </form>
-            <button onclick=\"add_to_cart($customerid , $bookid_json)\">Submit</button>";
+            <button onclick=\"add_to_cart($customerid , $bookid_json )\">Submit</button>";
     
     echo "<p id=\"add_to_cart_response\"></p>";
 
@@ -177,7 +217,16 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_category()\">Submit</button>";
     
     echo "<p id=\"add_to_category_response\"></p>";
+
+    echo "<h2>Table: Publisher</h2>";
     
+    print "<form>
+        	    New Publisher Type: <input type=\"text\" name=\"publisher_type\" id=\"publisher_insert\"><br>
+            </form>
+            <button onclick=\"add_to_publisher()\">Submit</button>";
+    
+    echo "<p id=\"add_to_publisher_response\"></p>";
+
     $categoryId = "1";
     $publisherId = "1";
     
@@ -204,6 +253,7 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_books($categoryId, $publisherId)\">Submit</button>";
     
     echo "<p id=\"add_to_books_response\"></p>";
+
    ?>
 
     <h1>Testing - Update</h1>
@@ -228,7 +278,6 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"update_in_cart_response\"></p>";
 
-
     echo "<h2>Table: Category</h2>";
     
     $categoryid = 1;
@@ -241,6 +290,36 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"update_in_category($categoryid)\">Submit</button>";
 
     echo "<p id=\"update_in_category_response\"></p>";
+
+    echo "<h2>Table: Publisher</h2>";
+    
+    $publisherid = "2";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing id = $publisherid</p>
+            <form>
+                New Type: <input type=\"text\" name=\"type\" id=\"publisher_type_update\"><br>
+            </form>
+            <button onclick=\"update_in_publisher($publisherid)\">Submit</button>";
+
+    echo "<p id=\"update_in_publisher_response\"></p>";
+
+    echo "<h2>Table: Books</h2>";
+    $isbn = "123456789"
+    $publisherId = "1";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing isbn = $isbn</p>
+            <p>publisherId = $title</p> 
+            <form>
+                New Name: <input type=\"text\" name=\"description\" id=\"decription_update\"><br>
+                New Price: <input type=\"number\" name=\"price\" step=\".01\" id=\"price_update\"><br>
+                New Preview: <input type=\"text\" name=\"previewLink\" id=\"previewLink_update\"><br>
+            
+             <input type=\"text\" name=\"displayImage\" id=\"displayImage_insert\"><br>
+            </form>
+            <button onclick=\"add_to_books($categoryId, $publisherId)\">Submit</button>";<button onclick=\"update_in_category($categoryid)\">Submit</button>";
+
 
 ?>
 
@@ -271,6 +350,24 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"select_from_category_response\"></p>";
 
+       
+    echo "<h2>Table: Publisher</h2>";
+    
+    $id = "2";
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing publisher id = $id</p>
+            <button onclick=\"select_from_publisher($id)\">Submit</button>";
+
+    echo "<p id=\"select_from_publisher_response\"></p>";
+
+    echo "<h2>Table: books</h2>";
+    $isbn = "1";
+ 
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing isbn = $isbn</p>
+            <button onclick=\"select_from_cart($isbn)\">Submit</button>";
+
+    echo "<p id=\"select_from_books_response\"></p>";
 
     ?>
 

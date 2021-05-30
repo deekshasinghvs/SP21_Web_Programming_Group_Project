@@ -183,4 +183,33 @@ function display_show_category_response(x,y,z)
 
 	}
 }
+function show_books(data) 
+{
+	var data_encoded = {'books_select_input_query':  JSON.stringify(data)};
+
+	// $("#select_from_books_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_books.php",
+			data: data_encoded,
+			success: display_show_books_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_books_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+	
+	$("#select_from_books_response").html('<table class="table" id="custtablebooks"><thead><tr><th>isbn</th><th>title</th><th>description</th><th>price</th><th>categoryId</th><th>previewLink</th><th>publicationDate</th><th>edition</th><th>publisherId</th><th>displayImage</th></tr></thead><tbody></tbody></table>');
+	
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = '<tr><td>'+ o[i].isbn +'</td><td>'+ o[i].title+'</td><td>'+ o[i].description+'</td><td>'+ o[i].price+'</td><td>'+o[i].categoryId+'</td><td>'+ o[i].previewLink+'</td><td>'+o[i].publicationDate+'</td><td>'+o[i].edition+'</td><td>'+ o[i].publisherId+'</td><td>'+o[i].displayImage+'</td><td>';
+
+		$('#custtablebooks TBODY').append(t);
+
+	}
+}
 
