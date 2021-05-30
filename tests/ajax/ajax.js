@@ -119,6 +119,28 @@ function display_update_category_response(x,y,z)
 	$("#update_in_category_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
 }
 
+function update_books(data) 
+{
+	var data_encoded = {'category_update_input_query':  JSON.stringify(data)};
+
+	$("#update_to_category_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/updates/db_update_category.php",
+			data: data_encoded,
+			success: display_update_category_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_update_category_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#update_in_category_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
+}
+
 
 // ======================================================
 // AJAX functions for selecting from the database, via POST/GET to the corresponding PHP files
