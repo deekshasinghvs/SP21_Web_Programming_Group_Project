@@ -8,7 +8,7 @@ function add_cart(data)
 {
 	var data_encoded = {'cart_insert_input_query':  JSON.stringify(data)};
 
-	$("#add_to_cart_response").append(data_encoded);
+	$("#add_to_cart_response").append(JSON.stringify(data));
 	
 	$.ajax({
 			type: "POST",
@@ -74,6 +74,7 @@ function add_orders(data)
 {
 	var data_encoded = {'orders_insert_input_query':  JSON.stringify(data)};
 
+	// $("#add_to_orders_response").append(JSON.stringify(data));
 	$("#add_to_orders_response").append(data_encoded);
 	
 	$.ajax({

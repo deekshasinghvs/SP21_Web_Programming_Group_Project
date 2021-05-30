@@ -56,7 +56,7 @@ include "../../../debug/chromephp-master/ChromePhp.php";
 require "../../../internal/dbconnect.php";
 session_start();
 
-$sql = "INSERT INTO `orders`(`customerId`, `orderDate`, `status`, `extraDetails`, `promoCode`, `paymentMethod`, `totalPrice`, `discount`, `finalPrice`, `currency`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO `orders`(`customerId`, `orderDate`, `status`, `extraDetails`, `promoCode`, `paymentMethod`, `totalPrice`, `discount`, `finalPrice`, `currency`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 // log to console
 ChromePhp::log($sql);
@@ -119,6 +119,9 @@ $insert_id = $mysqli->insert_id;
 // REMOVE - TO DO 🔲
 ChromePhp::log("Added to orders: orders_id=$insert_id");
 
+// ChromePhp::log("error=$stmt->error");
+
+$response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
 {

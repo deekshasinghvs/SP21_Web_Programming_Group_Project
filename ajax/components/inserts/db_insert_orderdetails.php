@@ -77,6 +77,7 @@ $insert_id = $mysqli->insert_id;
 // REMOVE - TO DO 🔲
 ChromePhp::log("Added to orderdetails: orderdetails_id=$insert_id");
 
+$response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
 {
