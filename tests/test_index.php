@@ -87,7 +87,11 @@ include "../debug/chromephp-master/ChromePhp.php";
         add_books(data); 
     }
 
+<<<<<<< Updated upstream
     function add_to_orders(Id, customerId)
+=======
+    function add_to_orders(customerId)
+>>>>>>> Stashed changes
     {
         var orderDate_id = "orderDate_insert";
         var orderDate = $("#" + orderDate_id).val();
@@ -109,7 +113,11 @@ include "../debug/chromephp-master/ChromePhp.php";
         var currency = $("#" + currency_id).val();
         
                                 
+<<<<<<< Updated upstream
         var data = {"id": id,
+=======
+        var data = {
+>>>>>>> Stashed changes
                     "customerId": customerId,
                     "orderDate": orderDate, 
                     "status": status,
@@ -243,7 +251,11 @@ include "../debug/chromephp-master/ChromePhp.php";
     
     echo "<p id=\"add_to_books_response\"></p>";
 
+<<<<<<< Updated upstream
     $id = "1";
+=======
+ 
+>>>>>>> Stashed changes
     $customerId = "1";
     
     echo "<h2>Table: Orders</h2>";
@@ -269,7 +281,11 @@ include "../debug/chromephp-master/ChromePhp.php";
              <input type=\"text\" name=\"currency\" id=\"currency_insert\"><br>
 
              </form>
+<<<<<<< Updated upstream
             <button onclick=\"add_to_orders($id, $customerId)\">Submit</button>";
+=======
+            <button onclick=\"add_to_orders($customerId)\">Submit</button>";
+>>>>>>> Stashed changes
     
     echo "<p id=\"add_to_orders_response\"></p>";
 
