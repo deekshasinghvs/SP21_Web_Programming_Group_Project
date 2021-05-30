@@ -6,10 +6,8 @@
  
 // orders_insert_input_query = 
 //     {
-//         Key: "id"
-//         Value: the admin's database id - should be able to be converted into type int 
 
-//         Key: "customerid"
+//         Key: "customerId"
 //         Value: the customer's database id - should be able to be converted into type int 
 
 //         Key: "orderDate" 
@@ -58,7 +56,7 @@ include "../../../debug/chromephp-master/ChromePhp.php";
 require "../../../internal/dbconnect.php";
 session_start();
 
-$sql = "INSERT INTO `orders`(`id`, `customerId`, `orderDate`, `status`, `extraDetails`, `promoCode`, `paymentMethod`, `totalPrice`, `discount`, `finalPrice`, `currency`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO `orders`(`customerId`, `orderDate`, `status`, `extraDetails`, `promoCode`, `paymentMethod`, `totalPrice`, `discount`, `finalPrice`, `currency`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 // log to console
 ChromePhp::log($sql);
@@ -69,8 +67,6 @@ $insert_input_query = json_decode($insert_input_query_encoded);
 
 
 // Parse the POST-ed JSON input object into individual attributes
-$id = number_format($insert_input_query->id);
-ChromePhp::log("\nid=$id");
 
 $customerId = number_format($insert_input_query->customerId);
 ChromePhp::log("\ncustomerId=$customerId");
@@ -112,7 +108,7 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("iisssssddds", $id, $customerid, $orderDate, $status, $extraDetails, $promoCode, $paymentMethod, $totalPrice, $discount, $finalPrice, $currency);
+$stmt->bind_param("isssssddds", $customerId, $orderDate, $status, $extraDetails, $promoCode, $paymentMethod, $totalPrice, $discount, $finalPrice, $currency);
 
 // executes statement
 $stmt->execute();
