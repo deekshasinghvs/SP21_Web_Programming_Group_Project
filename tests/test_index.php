@@ -319,14 +319,17 @@ include "../debug/chromephp-master/ChromePhp.php";
             <p>Existing isbn = $isbn</p>
             <p>publisherId = $title</p> 
             <form>
-                New Name: <input type=\"text\" name=\"description\" id=\"decription_update\"><br>
-                New Price: <input type=\"number\" name=\"price\" step=\".01\" id=\"price_update\"><br>
-                New Preview: <input type=\"text\" name=\"previewLink\" id=\"previewLink_update\"><br>
-            
-             <input type=\"text\" name=\"displayImage\" id=\"displayImage_insert\"><br>
+             New Title: <input type=\"text\" name=\"title\" id=\"title_updated\"><br>
+             New Name: <input type=\"text\" name=\"description\" id=\"decription_updated\"><br>
+             New Price: <input type=\"number\" name=\"price\" step=\".01\" id=\"price_updated\"><br>
+             New Preview: <input type=\"text\" name=\"previewLink\" id=\"previewLink_updated\"><br>
+             New Publication_Date: <input type=\"date\" name=\"publicationDate\" id=\"publicationDate_updated\"><br>
+             New Edition: <input type=\"number\" name=\"edition\" id=\"edition_updated\"><br>
+             New DisplayImage: <input type=\"text\" name=\"displayImage\" id=\"displayImage_updated\"><br>
             </form>
-            <button onclick=\"add_to_books($categoryId, $publisherId)\">Submit</button>";<button onclick=\"update_in_category($categoryid)\">Submit</button>";
+            <button onclick=\"add_to_books($isbn, $publisherId)\">Submit</button>";
 
+            echo "<p id=\"update_in_books_response\"></p>";
 
 ?>
 
@@ -357,7 +360,6 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"select_from_category_response\"></p>";
 
-<<<<<<< Updated upstream
        
     echo "<h2>Table: Publisher</h2>";
     
@@ -367,9 +369,8 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"select_from_publisher($id)\">Submit</button>";
 
     echo "<p id=\"select_from_publisher_response\"></p>";
+    
 
-=======
->>>>>>> Stashed changes
     echo "<h2>Table: books</h2>";
     $isbn = "1";
  
