@@ -107,7 +107,7 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("sssdissiis", $isbn, $title, $description, $price, $categoryId, $previewLink, $publicationDate, $edition, $publisherId, $displayImage);
+$stmt->bind_param("sssdisiiis", $isbn, $title, $description, $price, $categoryId, $previewLink, $publicationDate, $edition, $publisherId, $displayImage);
 
 // executes statement
 $stmt->execute();

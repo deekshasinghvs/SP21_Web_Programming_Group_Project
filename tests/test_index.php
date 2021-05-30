@@ -157,6 +157,13 @@ include "../debug/chromephp-master/ChromePhp.php";
             // Calls below function in the ajax/ajax.js file 
             show_category(data); 
         }
+    function select_from_books(isbn)
+        {                        
+            var data = {"isbn": isbn};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_books(data); 
+        }
 
     function select_from_publisher(id)
         {                        
@@ -350,6 +357,7 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"select_from_category_response\"></p>";
 
+<<<<<<< Updated upstream
        
     echo "<h2>Table: Publisher</h2>";
     
@@ -360,6 +368,8 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"select_from_publisher_response\"></p>";
 
+=======
+>>>>>>> Stashed changes
     echo "<h2>Table: books</h2>";
     $isbn = "1";
  
