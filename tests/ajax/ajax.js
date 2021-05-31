@@ -70,6 +70,161 @@ function display_add_books_response(x,y,z)
 	$("#add_to_books_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
+function add_orders(data)  
+{
+	var data_encoded = {'orders_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_orders_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_orders.php",
+			data: data_encoded,
+			success: display_add_orders_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_orders_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_orders_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+function add_bookdiscounts(data)  
+{
+	var data_encoded = {'bookdiscounts_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_bookdiscounts_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_bookdiscounts.php",
+			data: data_encoded,
+			success: display_add_bookdiscounts_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_bookdiscounts_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_bookdiscounts_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+function add_wishlist(data)  
+{
+	var data_encoded = {'wishlist_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_wishlist_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_wishlist.php",
+			data: data_encoded,
+			success: display_add_wishlist_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_wishlist_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_wishlist_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+function add_customerdiscounts(data)  
+{
+	var data_encoded = {'customerdiscounts_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_customerdiscounts_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_customerdiscounts.php",
+			data: data_encoded,
+			success: display_add_customerdiscounts_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_customerdiscounts_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_customerdiscounts_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+function add_discounts(data)  
+{
+	var data_encoded = {'discounts_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_discounts_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_discounts.php",
+			data: data_encoded,
+			success: display_add_discounts_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_discounts_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_discounts_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+
+function add_ratings(data)  
+{
+	var data_encoded = {'ratings_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_ratings_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_ratings.php",
+			data: data_encoded,
+			success: display_add_ratings_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_ratings_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_ratings_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+function add_reviews(data)  
+{
+	var data_encoded = {'reviews_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_reviews_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_reviews.php",
+			data: data_encoded,
+			success: display_add_reviews_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_reviews_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_reviews_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
 // ======================================================
 // AJAX functions for updating in database, via POST/GET to the corresponding PHP files
 // ======================================================
@@ -118,6 +273,7 @@ function display_update_category_response(x,y,z)
 
 	$("#update_in_category_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
 }
+
 
 
 // ======================================================

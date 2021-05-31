@@ -87,6 +87,144 @@ include "../debug/chromephp-master/ChromePhp.php";
         add_books(data); 
     }
 
+    function add_to_orders(Id, customerId)
+    {
+        var orderDate_id = "orderDate_insert";
+        var orderDate = $("#" + orderDate_id).val();
+        var status_id = "status_insert";
+        var status = $("#" + status_id).val();
+        var extraDetails_id = "extraDetails_insert";
+        var extraDetails = $("#" + extraDetails_id).val();
+        var promoCode_id = "promoCode_insert";
+        var promoCode = $("#" + promoCode_id).val();
+        var paymentMethod_id = "paymentMethod_insert";
+        var paymentMethod = $("#" + paymentMethod_id).val();
+        var totalPrice_id = "totalPrice_insert";
+        var totalPrice = $("#" + totalPrice_id).val();
+        var discount_id = "discount_insert";
+        var discount = $("#" + discount_id).val();
+        var finalPrice_id = "finalPrice_insert";
+        var finalPrice = $("#" + finalPrice_id).val();
+        var currency_id = "currency_insert";
+        var currency = $("#" + currency_id).val();
+        
+                                
+        var data = {"id": id,
+                    "customerId": customerId,
+                    "orderDate": orderDate, 
+                    "status": status,
+                    "extraDetails": extraDetails,
+                    "promoCode": promoCode,
+                    "paymentMethod":paymentMethod,
+                    "totalPrice": totalPrice,
+                    "discount": discount,
+                    "finalPrice": finalPrice,  
+                    "currency": currency
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_orders(data); 
+    }
+
+    function add_to_bookdiscounts()
+    {
+        var book_id = "bookId_insert";
+        var bookId = $("#" + book_Id).val();
+        var discount_id = "discountId_insert";
+        var discountId = $("#" + discount_Id).val();
+        
+        
+        var data = {"bookId": bookId,
+                    "discountId": discountId,
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_booksdiscounts(data); 
+    }
+
+    function add_to_wishlist(customerId, bookId)
+    {
+        var dateAdded_id = "dateAdded_insert";
+        var dateAdded = $("#" + dateAdded_id).val();    
+                                
+        var data = {"customerId": customerId,
+                    "bookId": bookId,
+                    "dateAdded": dateAdded, 
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_wishlist(data); 
+    }
+
+    function add_to_customerdiscounts(customerId, discountId)
+    {
+                              
+        var data = {"customerId": customerId,
+                    "discountId": discountId,
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_customerdiscounts(data); 
+    }
+
+    function add_to_discounts(id)
+    {
+        var type_id = "type_insert";
+        var type = $("#" + type_id).val();
+        var code_id = "code_insert";
+        var code = $("#" + code_id).val();
+        var value_id = "value_insert";
+        var value = $("#" + value_id).val();
+        var maxDiscount_id = "maxDiscount_insert";
+        var maxDiscount = $("#" + maxDiscount_id).val();
+        
+                                
+        var data = {"id": id,
+                    "type": type,
+                    "code": code, 
+                    "value": value,
+                    "maxDiscount": maxDiscount,
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_discounts(data); 
+    }
+
+    function add_to_ratings(id, customerId, bookdId)
+    {
+        var rating_id = "rating_insert";
+        var rating = $("#" + rating_id).val();
+        var dateUpdated_id = "dateUpdated_insert";
+        var dateUpdated = $("#" + dateUpdated_id).val();
+                                
+        var data = {"id": id,
+                    "customerID": customerID,
+                    "bookId": bookId, 
+                    "rating": rating,
+                    "dateUpdated": dateUpdated,
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_ratings(data); 
+    }
+
+    function add_to_reviews(id, ratingId)
+    {
+        var review_id = "review_insert";
+        var review = $("#" + review_id).val();
+        var dateUpdated_id = "dateUpdated_insert";
+        var dateUpdated = $("#" + dateUpdated_id).val();
+                                
+        var data = {"id": id,
+                    "ratingId": ratingId, 
+                    "review": review,
+                    "dateUpdated": dateUpdated,
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_reviews(data); 
+    }
+
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
@@ -204,6 +342,123 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_books($categoryId, $publisherId)\">Submit</button>";
     
     echo "<p id=\"add_to_books_response\"></p>";
+
+    $id = "1";
+    $customerId = "1";
+    
+    echo "<h2>Table: Orders</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Orders_orderDate</label>
+             <input type=\"text\" name=\"orderDate\" id=\"orderDate_insert\"><br>
+             <label>Orders_status</label>
+             <input type=\"text\" name=\"status\" id=\"status_insert\"><br>
+             <label>Orders_extraDetails</label>
+             <input type=\"text\" name=\"extraDetails\" id= \"extraDetails_insert\"><br>
+             <label>Orders_promoCode</label>
+             <input type=\"text\" name=\"promoCode\" id=\"promoCode_insert\"><br>
+             <label>Orders_paymentMethod</label>
+             <input type=\"text\" name=\"paymentMethod\" id=\"paymentMethod_insert\"><br>
+             <label>Orders_totalPrice</label>
+             <input type=\"number\" name=\"totalPrice\" id=\"totalPrice_insert\"><br>
+             <label>Orders_discount</label>
+             <input type=\"number\" name=\"discount\" id=\"discount_insert\"><br>
+             <label>Orders_finalPrice</label>
+             <input type=\"number\" name=\"finalPrice\" id=\"finalPrice_insert\"><br>
+             <label>Orders_currency</label>
+             <input type=\"text\" name=\"currency\" id=\"currency_insert\"><br>
+
+             </form>
+            <button onclick=\"add_to_orders($id, $customerId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_orders_response\"></p>";
+
+    $bookId = "1234567891012";
+    $discountId = "1";
+    
+    echo "<h2>Table: BookDiscounts</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+            <button onclick=\"add_to_bookdiscounts($bookId, $discountId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_bookdiscounts_response\"></p>";
+
+    $customerId = "1";
+    $bookId = "1234567891012";
+    
+    echo "<h2>Table: Wishlist</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Wishlist_dateAdded</label>
+             <input type=\"text\" name=\"dateAdded\" id=\"dateAdded_insert\"><br>
+
+             </form>
+            <button onclick=\"add_to_wishlist($customerid, $bookId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_wishlist_response\"></p>";
+
+    $customerId = "1";
+    $bdiscountId = "1";
+    
+    echo "<h2>Table: CustomerDiscounts</h2>";
+    print "<h3>Via Form</h3>
+             </form>
+            <button onclick=\"add_to_customerdiscounts($customerid, $discountId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_customerdiscounts_response\"></p>";
+
+    $id = "1";
+    
+    echo "<h2>Table: Discounts</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Discounts_type</label>
+             <input type=\"text\" name=\"type\" id=\"type_insert\"><br>
+             <label>Discounts_code</label>
+             <input type=\"text\" name=\"code\" id=\"code_insert\"><br>
+             <label>Discounts_value</label>
+             <input type=\"text\" name=\"value\" id= \"value_insert\"><br>
+             <label>Discounts_maxDiscounts</label>
+             <input type=\"text\" name=\"maxDiscounts\" id=\"maxDiscounts_insert\"><br> 
+
+             </form>
+            <button onclick=\"add_to_discounts($id)\">Submit</button>";
+    
+    echo "<p id=\"add_to_discounts_response\"></p>";
+
+    $id = "1"; 
+    $customerId = "1";
+    $bookId = "1234567891012";
+    
+    echo "<h2>Table: Ratings</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Ratings_rating</label>
+             <input type=\"text\" name=\"rating\" id=\"rating_insert\"><br>
+             <label>Ratings_dateUpdated</label>
+             <input type=\"text\" name=\"dateUpdated\" id=\"dateUpdated_insert\"><br>
+
+             </form>
+            <button onclick=\"add_to_ratings($id, $customerId, $bookId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_ratings_response\"></p>";
+
+    $id = "1"; 
+    $ratingId = "1";
+    
+    echo "<h2>Table: Reviews</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Reviews_review</label>
+             <input type=\"text\" name=\"review\" id=\"review_insert\"><br>
+             <label>Reviews_dateUpdated</label>
+             <input type=\"text\" name=\"dateUpdated\" id=\"dateUpdated_insert\"><br>
+
+             </form>
+            <button onclick=\"add_to_reviews($id, $ratingId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_reviews_response\"></p>";
+
    ?>
 
     <h1>Testing - Update</h1>
