@@ -20,7 +20,7 @@
 // category_update_output_response = 
 //     {  
 //         "response_code": <RESPONSE CODE>,
-//         "response": <UPDATE ID>
+//         "response": "null"
 //     }
 
 
@@ -73,7 +73,7 @@ $stmt->execute();
 ChromePhp::log("SQL Executed");
 
 // get the id of the update
-$update_id = $mysqli->update_id;
+$update_id = "null";
 
 // REMOVE - TO DO 🔲
 ChromePhp::log("Updated category: update_id=$update_id");

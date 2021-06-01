@@ -63,6 +63,57 @@ include "../debug/chromephp-master/ChromePhp.php";
         add_publisher(data); 
     }
 
+    function add_to_books()
+    {
+        var isbn_id = "isbn_insert";
+        var isbn = $("#"+ isbn_id).val();
+        var title_id = "title_insert";
+        var title = $("#"+title_id).val();
+        var description_id = "description_insert";
+        var description = $("#"+ description_id).val();
+        var price_id = "price_insert";
+        var price = $("#"+ price_id).val();
+        var category_Id = "categoryId_insert";
+        var categoryId = $("#"+ category_Id).val();
+        var previewLink_id = "previewLink_insert";
+        var previewLink = $("#"+ previewLink_id).val();
+        var publicationDate_id = "publicationDate_insert";
+        var publicationDate = $("#"+ publicationDate_id).val();
+        var edition_id = "edition_insert";
+        var edition = $("#"+ edition_id).val();
+        var publisher_Id = "publisherId_insert";
+        var publisherId = $("#"+ publisher_Id).val();
+        var displayImage_id = "displayImage_insert";
+        var displayImage = $("#"+displayImage_id).val();
+        
+                                
+        var data = {"isbn": isbn, 
+                    "title": title,
+                    "description": description,
+                    "price": price,
+                    "categoryId":categoryId,
+                    "previewLink": previewLink,
+                    "publicationDate": publicationDate,
+                    "edition": edition,
+                    "publisherId": publisherId,
+                    "displayImage": displayImage
+                    };
+        // Calls below function in the ajax/ajax.js file
+        add_books(data);
+     }
+
+     function add_to_author()
+    {
+        var firstName = $("#firstName_insert").val();
+        var secondName = $("#secondName_insert").val();
+
+        var data = {"firstName": firstName,
+                    "secondName": secondName};
+                        
+        // Calls below function in the ajax/ajax.js file
+        add_author(data); 
+    }
+
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
@@ -104,6 +155,46 @@ include "../debug/chromephp-master/ChromePhp.php";
         update_publisher(data); 
     }
 
+    function update_in_books(isbn_json, publisherId)
+    {
+        var title = $("#title_updated").val();
+        var description = $("#decription_updated").val();
+        var price = $("#price_updated").val();
+        var categoryId = $("#category_updated").val();
+        var previewLink = $("#previewLink_updated").val();
+        var publicationDate = $("#publicationDate_updated").val();
+        var edition = $("#edition_updated").val();
+        var displayImage = $("#displayImage_updated").val();
+                                
+        var data = {"isbn": isbn_json, 
+                    "title": title,
+                    "description": description,
+                    "price": price,
+                    "categoryId":categoryId,
+                    "previewLink": previewLink,
+                    "publicationDate": publicationDate,
+                    "edition": edition,
+                    "publisherId": publisherId,
+                    "displayImage": displayImage
+                    };
+        // Calls below function in the ajax/ajax.js file 
+        update_books(data); 
+    }
+
+    function update_in_author(id)
+    {
+        var firstName = $("#first_name_update").val();
+        var secondName = $("#second_name_update").val();
+                                
+        var data = {"id": parseInt(id),
+                    "firstName": firstName,
+                    "secondName": secondName
+                    };
+        // Calls below function in the ajax/ajax.js file 
+        update_author(data); 
+    }
+
+
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
@@ -130,6 +221,23 @@ include "../debug/chromephp-master/ChromePhp.php";
             // Calls below function in the ajax/ajax.js file 
             show_publisher(data); 
         }
+    
+    function select_from_books(isbn_json)
+        {                        
+            var data = {"isbn": isbn_json};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_books(data); 
+        }
+    function select_from_author(id)
+        {                        
+            var data = {"id": parseInt(id)};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_author(data);
+        }
+
+
 
     </script>
   </head>
@@ -183,6 +291,45 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"add_to_publisher()\">Submit</button>";
     
     echo "<p id=\"add_to_publisher_response\"></p>";
+
+    echo "<h2>Table: Books</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Book_ISBN</label>
+             <input type=\"text\" name=\"isbn\" id=\"isbn_insert\"><br>
+             <label>Book_Title</label>
+             <input type=\"text\" name=\"title\" id=\"title_insert\"><br>
+             <label>Book_Description</label>
+             <input type=\"text\" name=\"description\" id= \"description_insert\"><br>
+             <label>Book_Price</label>
+             <input type=\"number\" name=\"price\" step=\".01\" id=\"price_insert\"><br>
+             <label>Book_Category</label>
+             <input type=\"text\" name=\"categoryId\" id=\"categoryId_insert\"><br>
+             <label>Book_Preview</label>
+             <input type=\"text\" name=\"previewLink\" id=\"previewLink_insert\"><br>
+             <label>Book_Publication_Date</label>
+             <input type=\"date\" name=\"publicationDate\" id=\"publicationDate_insert\"><br>
+             <label>Book_Edition</label>
+             <input type=\"number\" name=\"edition\" id=\"edition_insert\"><br>
+             <label>Book_Publisher</label>
+             <input type=\"text\" name=\"publisherId\" id=\"publisherId_insert\"><br>
+             <label>Book_Image</label>
+             <input type=\"text\" name=\"displayImage\" id=\"displayImage_insert\"><br>
+            </form>
+            <button onclick=\"add_to_books()\">Submit</button>";
+
+        echo "<p id=\"add_to_books_response\"></p>";
+
+        echo "<h2>Table: Author</h2>";
+    
+    print "<form>
+        	    New Author First Name: <input type=\"text\" name=\"firstName\" id=\"firstName_insert\"><br>
+                New Author Second Name: <input type=\"text\" name=\"secondName\" id=\"secondName_insert\"><br>
+            </form>
+            <button onclick=\"add_to_author()\">Submit</button>";
+    
+    echo "<p id=\"add_to_author_response\"></p>";
+
    ?>
 
     <h1>Testing - Update</h1>
@@ -233,6 +380,44 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"update_in_publisher_response\"></p>";
 
+    echo "<h2>Table: Books</h2>";
+
+    $isbn = "123ABC";
+    $isbn_json = "'123ABC'";
+    $publisherId = "1";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing isbn = $isbn</p>
+            <p>publisherId = $publisherId</p> 
+            <form>
+             New Title: <input type=\"text\" name=\"title\" id=\"title_updated\"><br>
+             New Description: <input type=\"text\" name=\"description\" id=\"decription_updated\"><br>
+             New Price: <input type=\"number\" name=\"price\" step=\".01\" id=\"price_updated\"><br>
+             New Category:<input type=\"number\" name=\"categoryId\" id=\"category_updated\"><br>
+             New Preview: <input type=\"text\" name=\"previewLink\" id=\"previewLink_updated\"><br>
+             New Publication_Date: <input type=\"date\" name=\"publicationDate\" id=\"publicationDate_updated\"><br>
+             New Edition: <input type=\"number\" name=\"edition\" id=\"edition_updated\"><br>
+             New DisplayImage: <input type=\"text\" name=\"displayImage\" id=\"displayImage_updated\"><br>
+            </form>
+            <button onclick=\"update_in_books($isbn_json, $publisherId)\">Submit</button>";
+
+            echo "<p id=\"update_in_books_response\"></p>";
+    
+    echo "<h2>Table: Author</h2>";
+    
+     $id = 2;
+               
+         print "<h3>Via Button with pre-defined values</h3>
+        <p>Existing id = $id</p>
+        <form>
+            New First_Name: <input type=\"text\" name=\"firstName\" id=\"first_name_update\"><br>
+            New Second_Name: <input type=\"text\" name=\"secondName\" id=\"second_name_update\"><br>
+        </form>
+        <button onclick=\"update_in_author($id)\">Submit</button>";
+               
+        echo "<p id=\"update_in_author_response\"></p>";
+   
+
 ?>
 
 
@@ -271,6 +456,25 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"select_from_publisher($id)\">Submit</button>";
 
     echo "<p id=\"select_from_publisher_response\"></p>";
+
+    echo "<h2>Table: Books</h2>";
+    $isbn = "123ABC";
+    $isbn_json = "'123ABC'";
+ 
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing isbn = $isbn</p>
+            <button onclick=\"select_from_books($isbn_json)\">Submit</button>";
+
+    echo "<p id=\"select_from_books_response\"></p>";
+
+    echo "<h2>Table: Author</h2>";
+    
+    $id = "3";
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing author id = $id</p>
+            <button onclick=\"select_from_author($id)\">Submit</button>";
+
+    echo "<p id=\"select_from_author_response\"></p>";
 
 
     ?>
