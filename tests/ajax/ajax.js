@@ -4,6 +4,79 @@ var xmlhttp;
 // AJAX functions for inserting to database, via POST/GET to the corresponding PHP files
 // ======================================================
 
+function add_genre(data)  
+{
+	var data_encoded = {'genre_insert_input_query':  JSON.stringify(data)};
+
+	// $("#add_to_orders_response").append(JSON.stringify(data));
+	$("#add_to_genre_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_genre.php",
+			data: data_encoded,
+			success: display_add_genre_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_genre_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_genre_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+
+function add_orderdetails(data)  
+{
+	var data_encoded = {'orderdetails_insert_input_query':  JSON.stringify(data)};
+
+	// $("#add_to_orders_response").append(JSON.stringify(data));
+	$("#add_to_orderdetails_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_orderdetails.php",
+			data: data_encoded,
+			success: display_add_orderdetails_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_orderdetails_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_orderdetails_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+
+function add_orders(data)  
+{
+	var data_encoded = {'orders_insert_input_query':  JSON.stringify(data)};
+
+	// $("#add_to_orders_response").append(JSON.stringify(data));
+	$("#add_to_orders_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_orders.php",
+			data: data_encoded,
+			success: display_add_orders_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_orders_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_orders_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+
+
 function add_cart(data)  
 {
 	var data_encoded = {'cart_insert_input_query':  JSON.stringify(data)};
@@ -71,6 +144,30 @@ function display_add_publisher_response(x,y,z)
 	$("#add_to_publisher_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
+// function add_bookgenre(data)  
+// {
+// 	var data_encoded = {'bookgenre_insert_input_query':  JSON.stringify(data)};
+
+// 	$("#add_to_bookgenre_response").append(data_encoded);
+	
+// 	$.ajax({
+// 			type: "POST",
+// 			url: "../ajax/components/inserts/db_insert_bookgenre.php",
+// 			data: data_encoded,
+// 			success: display_add_bookgenre_response
+// 		   });
+// }
+
+// // success function - will contain HTML formatting - can be in a separate file during non-testing stages
+// function display_add_bookgenre_response(x,y,z) 
+// {
+// 	var o = JSON.parse(x);
+
+// 	$("#add_to_bookgenre_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+// }
+
+
+
 function add_books(data)  
 {
 	var data_encoded = {'books_insert_input_query':  JSON.stringify(data)};
@@ -121,6 +218,30 @@ function display_add_author_response(x,y,z)
 // ======================================================
 // AJAX functions for updating in database, via POST/GET to the corresponding PHP files
 // ======================================================
+function update_orderdetails(data) 
+{
+	var data_encoded = {'orderdetails_update_input_query':  JSON.stringify(data)};
+
+	$("#update_in_orderdetails_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/updates/db_update_orderdetails.php",
+			data: data_encoded,
+			success: display_update_orderdetails_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_update_orderdetails_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#update_in_orderdetails_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
+}
+
+
+
 
 function update_cart(data) 
 {
@@ -144,6 +265,28 @@ function display_update_cart_response(x,y,z)
 	$("#update_in_cart_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
 }
 
+function update_orders(data) 
+{
+	var data_encoded = {'orders_update_input_query':  JSON.stringify(data)};
+
+	$("#update_to_orders_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/updates/db_update_orders.php",
+			data: data_encoded,
+			success: display_update_orders_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_update_orders_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#update_in_orders_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
+}
+
 
 function update_category(data) 
 {
@@ -165,7 +308,7 @@ function display_update_category_response(x,y,z)
 	var o = JSON.parse(x);
 
 	$("#update_in_category_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
-} 
+}
 
 
 function update_publisher(data) 
@@ -189,6 +332,32 @@ function display_update_publisher_response(x,y,z)
 
 	$("#update_in_publisher_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
 }
+
+function update_genre(data) 
+{
+	var data_encoded = {'genre_update_input_query':  JSON.stringify(data)};
+
+	$("#update_to_genre_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/updates/db_update_genre.php",
+			data: data_encoded,
+			success: display_update_genre_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_update_genre_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#update_in_genre_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
+}
+
+
+
+
 
 function update_books(data) 
 {
@@ -329,6 +498,40 @@ function display_show_publisher_response(x,y,z)
 	}
 }
 
+
+
+function show_genre(data) 
+{
+	var data_encoded = {'genre_select_input_query':  JSON.stringify(data)};
+
+	// $("#select_from_publisher_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_genre.php",
+			data: data_encoded,
+			success: display_show_genre_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_genre_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+	
+	$("#select_from_genre_response").html('<table class="table" id="custtablegenre"><thead><tr><th>ID</th><th>Type</th></tr></thead><tbody></tbody></table>');
+	
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = '<tr><td>'+ o[i].id +'</td><td>'+ o[i].type+'</td><td>';
+
+		$('#custtablegenre TBODY').append(t);
+
+	}
+}
+
+
+
 function show_books(data) 
 {
 	var data_encoded = {'books_select_input_query':  JSON.stringify(data)};
@@ -389,3 +592,63 @@ function display_show_author_response(x,y,z)
 	}
 }
 
+
+function show_orderdetails(data) 
+{
+	var data_encoded = {'orderdetails_select_input_query':  JSON.stringify(data)};
+
+	// $("#select_from_cart_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_orderdetails.php",
+			data: data_encoded,
+			success: display_show_orderdetails_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_orderdetails_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+
+	$("#select_from_orderdetails_response").html('<table class="table" id="custtableorderdetails"><thead><tr><th>orderId</th><th>bookId</th><th>quantity</th></tr></thead><tbody></tbody></table>');
+	
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = '<tr><td>'+ o[i].orderId +'</td><td>'+ o[i].bookId+'</td><td>'+o[i].quantity+'</td></tr>';
+
+		$('#custtableorderdetails TBODY').append(t);
+
+	}
+}
+
+
+function show_orders(data) 
+{
+	var data_encoded = {'orders_select_input_query':  JSON.stringify(data)};
+
+	// $("#select_from_cart_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_orders.php",
+			data: data_encoded,
+			success: display_show_orders_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_orders_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+
+	$("#select_from_orders_response").html('<table class="table" id="custtableorders"><thead><tr><th>id</th><th>customerId</th><th>orderDate</th><th>status</th><th>extraDetails</th><th>promoCode</th><th>paymentMethod</th><th>totalPrice</th><th>discount</th><th>finalPrice</th><th>currency</th></tr></thead><tbody></tbody></table>');	
+	
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = '<tr><td>'+ o[i].id+'</td><td>'+ o[i].customerId+'</td><td>'+o[i].orderDate+'</td><td>'+o[i].status+'</td><td>'+o[i].extraDetails+'</td><td>'+o[i].promoCode+'</td><td>'+o[i].paymentMethod+'</td><td>'+o[i].totalPrice+'</td><td>'+o[i].discount+'</td><td>'+o[i].finalPrice+'</td><td>'+o[i].currency+'</td></tr>';
+		$('#custtableorders TBODY').append(t);
+
+	}
+}
