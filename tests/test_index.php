@@ -306,7 +306,6 @@ function update_in_orderdetails(orderId, bookId)
         update_publisher(data); 
     }
 
-    function update_in_books(isbn, publisherId)
     function update_in_genre(id)
     {
         var type = $("#genre_type_update").val();
@@ -373,10 +372,7 @@ function update_in_orderdetails(orderId, bookId)
         update_orders(data); 
     }
 
-
-
-
-    function update_in_author(id)
+     function update_in_author(id)
     {
         var firstName = $("#first_name_update").val();
         var secondName = $("#second_name_update").val();
