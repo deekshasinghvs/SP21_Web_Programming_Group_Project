@@ -12,20 +12,20 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" style="background: url(&quot;assets/Books_assets/img/iStock-689785084.jpg&quot;), rgb(253, 255, 0);background-size: contain, auto;">
         <div class="row"></div>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#"><span>Home</span></a></li>
-            <li class="breadcrumb-item"><a href="#"><span>Library</span></a></li>
-            <li class="breadcrumb-item"><a href="#"><span>Data</span></a></li>
+        <ol class="breadcrumb" style="background: #ffffff;opacity: 0.45;">
+            <li class="breadcrumb-item"><a href="#"><span style="color: rgb(0,0,0);">Home</span></a></li>
+            <li class="breadcrumb-item"><a href="#"><span style="color: rgb(0,0,0);">Library</span></a></li>
+            <li class="breadcrumb-item"><a href="#"><span style="color: rgb(0,0,0);">Data</span></a></li>
         </ol>
         <div class="row" style="height: 80px;"></div>
-        <div class="row">
+        <div class="row" style="background: #ffffff;opacity: 0.30;">
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
         </div>
-        <div class="row">
+        <div class="row" style="background: #ffffff;opacity: 0.60;transform: perspective(0px);">
             <div class="col">
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"></h3>
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"><a href="#" style="color: rgb(0,0,0);">Book Name</a></h3>
@@ -44,12 +44,12 @@
             </div>
         </div>
         <div class="row"></div>
-        <div class="row">
+        <div class="row" style="opacity: 0.30;background: #ffffff;transform: perspective(1px);">
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
         </div>
-        <div class="row">
+        <div class="row" style="background: #ffffff;opacity: 0.60;">
             <div class="col">
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"></h3>
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"><a href="#" style="color: rgb(0,0,0);">Book Name</a></h3>
@@ -68,12 +68,12 @@
             </div>
         </div>
         <div class="row"></div>
-        <div class="row">
+        <div class="row" style="opacity: 0.30;background: #ffffff;">
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
         </div>
-        <div class="row">
+        <div class="row" style="opacity: 0.60;">
             <div class="col">
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"></h3>
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"><a href="#" style="color: rgb(0,0,0);">Book Name</a></h3>
@@ -92,12 +92,12 @@
             </div>
         </div>
         <div class="row"></div>
-        <div class="row">
+        <div class="row" style="background: #ffffff;opacity: 0.30;">
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="http://placehold.it/500x300" height="100px" style="width: 150px;height: 199px;text-align: center;"></div>
         </div>
-        <div class="row">
+        <div class="row" style="background: #ffffff;opacity: 0.60;">
             <div class="col">
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"></h3>
                 <h3 class="my-3" style="text-align: center;font-size: 20px;"><a href="#" style="color: rgb(0,0,0);">Book Name</a></h3>
@@ -130,5 +130,4 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
-</html>
 </p>
