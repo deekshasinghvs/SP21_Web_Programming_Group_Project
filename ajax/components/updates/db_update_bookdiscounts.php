@@ -20,7 +20,7 @@
 // bookdiscounts_select_output_response = 
 //     {  
 //         "response_code": <RESPONSE CODE>,
-//         "response": <null>
+//         "response": "null"
 //     }
 
 
@@ -30,7 +30,7 @@ include "../../../debug/chromephp-master/ChromePhp.php";
 require "../../../internal/dbconnect.php";
 session_start();
 
-$sql = "UPDATE `books` SET `bookId`=?, and `customerId`=?";
+$sql = "UPDATE `bookdiscounts` SET `bookId`=? and `discountId`=?";
 
 // log to console
 ChromePhp::log($sql);
@@ -47,7 +47,6 @@ ChromePhp::log("\nbookId=$bookId");
 
 $discountId = number_format($update_input_query->discountId);
 ChromePhp::log("\ndiscountId=$discountId");
-
 
 // prepares the SQL statement
 $stmt = $mysqli->prepare($sql);
@@ -71,11 +70,11 @@ $stmt->execute();
 ChromePhp::log("SQL Executed"); 
 
 // get the id of the update
-
 $update_id = "null";
 
+
 // REMOVE - TO DO 🔲
-ChromePhp::log("Updated book: update_id = $update_id");
+ChromePhp::log("Updated bookdiscounts: update_id=$update_id");
 $response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
@@ -84,10 +83,10 @@ if ($stmt->error == "")
 }
 
 $response->response = "$update_id";
-$books_update_output_response = json_encode($response);
+$bookdiscounts_update_output_response = json_encode($response);
 
 // REMOVE - TO DO 🔲
-ChromePhp::log("\nComponent Output Response=$books_update_output_response");
+ChromePhp::log("\nComponent Output Response=$bookdiscounts_update_output_response");
 
-print $books_update_output_response;
+print $bookdiscounts_update_output_response;
 ?>

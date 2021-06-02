@@ -68,8 +68,8 @@ $stmt->execute();
 $insert_id = $mysqli->insert_id;
 
 // REMOVE - TO DO 🔲
-ChromePhp::log("Added to bookdiscounts: bookdiscounts_insert_id=$insert_id");
-
+ChromePhp::log("Added to bookdiscounts: bookdiscount_id=$insert_id");
+$response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
 {
