@@ -6,7 +6,6 @@
  
 // orders_insert_input_query = 
 //     {
-
 //         Key: "customerId"
 //         Value: the customer's database id - should be able to be converted into type int 
 
@@ -86,13 +85,13 @@ ChromePhp::log("\npromoCode=$promoCode");
 $paymentMethod = $insert_input_query->paymentMethod;
 ChromePhp::log("\npaymentMethod=$paymentMethod");
 
-$totalPrice = number_format($insert_input_query->totalPrice);
+$totalPrice = number_format($insert_input_query->totalPrice,2);
 ChromePhp::log("\ntotalPrice=$totalPrice");
 
-$discount = number_format($insert_input_query->discount);
+$discount = number_format($insert_input_query->discount,2);
 ChromePhp::log("\ndiscount=$discount");
 
-$finalPrice = number_format($insert_input_query->finalPrice);
+$finalPrice = number_format($insert_input_query->finalPrice,2);
 ChromePhp::log("\nfinalPrice=$finalPrice");
 
 $currency = $insert_input_query->currency;

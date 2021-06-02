@@ -27,6 +27,59 @@ include "../debug/chromephp-master/ChromePhp.php";
 // =====================================================
 // JS functions for inserting a row to the database
 // ===================================================== 
+function add_to_orderdetails(orderId, bookId)
+    {
+        var quantity_id = bookId.substring(0,14) + "_quantity_insert";           
+        var quantity = parseInt($("#" + quantity_id).val());
+                                
+        var data = {"orderId": orderId, 
+                    "bookId": bookId,
+                    "quantity": quantity
+                    };
+        // Calls below function in the ajax/ajax.js file
+        add_orderdetails(data); 
+    }
+
+
+    function add_to_orders(customerId)
+    {
+        var orderDate_id = "orderDate_insert";
+        var orderDate = $("#" + orderDate_id).val();
+        var status_id = "status_insert";
+        var status = $("#" + status_id).val();
+        var extraDetails_id = "extraDetails_insert";
+        var extraDetails = $("#" + extraDetails_id).val();
+        var promoCode_id = "promoCode_insert";
+        var promoCode = $("#" + promoCode_id).val();
+        var paymentMethod_id = "paymentMethod_insert";
+        var paymentMethod = $("#" + paymentMethod_id).val();
+        var totalPrice_id = "totalPrice_insert";
+        var totalPrice = $("#" + totalPrice_id).val();
+        var discount_id = "discount_insert";
+        var discount = $("#" + discount_id).val();
+        var finalPrice_id = "finalPrice_insert";
+        var finalPrice = $("#" + finalPrice_id).val();
+        var currency_id = "currency_insert";
+        var currency = $("#" + currency_id).val();
+        
+        var data = {"customerId": customerId,
+                    "orderDate": orderDate, 
+                    "status": status,
+                    "extraDetails": extraDetails,
+                    "promoCode": promoCode,
+                    "paymentMethod":paymentMethod,
+                    "totalPrice": totalPrice,
+                    "discount": discount,
+                    "finalPrice": finalPrice,  
+                    "currency": currency
+                    };
+
+        // Calls below function in the ajax/ajax.js file
+        add_orders(data); 
+    }
+
+    
+    
     function add_to_cart(customerid, bookid)
     {
         var quantity_id = bookid.substring(0,14) + "_quantity_insert";           
@@ -62,6 +115,32 @@ include "../debug/chromephp-master/ChromePhp.php";
         // Calls below function in the ajax/ajax.js file
         add_publisher(data); 
     }
+
+    // function add_to_bookgenre()
+    // {
+    //     var type = $("#bookgenre_insert").val();
+                                
+    //     var data = {"genreId": genreId, 
+    //                 "bookId": bookId,
+    //                 };
+
+    //     // Calls below function in the ajax/ajax.js file
+    //     add_bookgenre(data); 
+    // }
+
+
+
+
+    function add_to_genre()
+    {
+        var type = $("#genre_insert").val();
+                                
+        var data = {"type": type};
+
+        // Calls below function in the ajax/ajax.js file
+        add_genre(data); 
+    }
+
 
     function add_to_books()
     {
@@ -117,6 +196,18 @@ include "../debug/chromephp-master/ChromePhp.php";
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
+function update_in_orderdetails(orderId, bookId)
+    {
+        var quantity_id = bookId.substring(0,14) + "_quantity_update_orderdetails";           
+        var quantity = parseInt($("#" + quantity_id).val());
+        var data = {"orderId": orderId, 
+                    "bookId": bookId,
+                    "quantity": quantity
+                    };
+        // Calls below function in the ajax/ajax.js file 
+        update_orderdetails(data); 
+    }
+
 
     function update_in_cart(customerid, bookid)
     {
@@ -155,6 +246,19 @@ include "../debug/chromephp-master/ChromePhp.php";
         update_publisher(data); 
     }
 
+    function update_in_genre(id)
+    {
+        var type = $("#genre_type_update").val();
+                                
+        var data = {"id": parseInt(id), 
+                    "type": type
+                    };
+
+        // Calls below function in the ajax/ajax.js file 
+        update_genre(data); 
+    }
+
+
     function update_in_books(isbn_json, publisherId)
     {
         var title = $("#title_updated").val();
@@ -181,6 +285,36 @@ include "../debug/chromephp-master/ChromePhp.php";
         update_books(data); 
     }
 
+    function update_in_orders(customerId, id)
+    {  
+        // var id = parseInt("6");
+        var status = $("#status_updated").val();
+        var extraDetails = $("#extraDetails_updated").val();
+        var promoCode = $("#promoCode_updated").val();
+        var paymentMethod = $("#paymentMethod_updated").val();
+        var totalPrice = parseFloat($("#totalPrice_updated").val());
+        var discount = parseFloat($("#discount_updated").val());
+        var finalPrice = parseFloat($("#finalPrice_updated").val());
+        var currency = $("#currency_updated").val();
+                                
+        var data = {"customerId": customerId, 
+                    "status": status,
+                    "extraDetails": extraDetails,
+                    "promoCode":promoCode,
+                    "paymentMethod": paymentMethod,
+                    "totalPrice": totalPrice,
+                    "discount": discount,
+                    "finalPrice": finalPrice,
+                    "currency": currency,
+                    "id": id
+                    };
+        // Calls below function in the ajax/ajax.js file 
+        update_orders(data); 
+    }
+
+
+
+
     function update_in_author(id)
     {
         var firstName = $("#first_name_update").val();
@@ -198,6 +332,23 @@ include "../debug/chromephp-master/ChromePhp.php";
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
+function select_from_orderdetails(orderId)
+        {                        
+            var data = {"orderId": orderId};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_orderdetails(data); 
+        }
+
+        function select_from_orders(customerId)
+        {                        
+            var data = {"customerId": customerId};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_orders(data); 
+        }
+
+    
     function select_from_cart(customerid)
         {                        
             var data = {"customerid": customerid};
@@ -221,7 +372,17 @@ include "../debug/chromephp-master/ChromePhp.php";
             // Calls below function in the ajax/ajax.js file 
             show_publisher(data); 
         }
-    
+
+        
+        function select_from_genre(id)
+        {                        
+            var data = {"id": parseInt(id)};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_genre(data); 
+        }
+
+        
     function select_from_books(isbn_json)
         {                        
             var data = {"isbn": isbn_json};
@@ -309,6 +470,27 @@ include "../debug/chromephp-master/ChromePhp.php";
     
     echo "<p id=\"add_to_publisher_response\"></p>";
 
+
+    echo "<h2>Table: Genre</h2>";
+    
+    print "<form>
+        	    New genre Type: <input type=\"text\" name=\"genre_type\" id=\"genre_insert\"><br>
+            </form>
+            <button onclick=\"add_to_genre()\">Submit</button>";
+    
+    echo "<p id=\"add_to_genre_response\"></p>";
+
+    // echo "<h2>Table: ADD book Genre</h2>";
+    
+    // print "<form>
+    //     	    New genre id: <input type=\"text\" name=\"genre_id\" id=\"genreId\"><br>
+    //             New bookid: <input type=\"text\" name=\"bookid\" id=\"bookId\"><br>
+           
+    //             </form>
+    //         <button onclick=\"add_to_bookgenre()\">Submit</button>";
+    
+    // echo "<p id=\"add_to_genre_response\"></p>";
+
     echo "<h2>Table: Books</h2>";
     print "<h3>Via Form</h3>
              <form>
@@ -347,6 +529,51 @@ include "../debug/chromephp-master/ChromePhp.php";
     
     echo "<p id=\"add_to_author_response\"></p>";
 
+    $bookId = "1234567891012";
+    $bookId_json = "'1234567891012'";
+    $orderId = "6";
+    
+    print "<h3>add order details</h3>
+            <p>Existing bookId = $bookId</p>
+            <p>Existing orderId = $orderId</p>
+            <form>
+        	    Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookId}_quantity_insert\" value=\"1\"><br>
+            </form>
+            <button onclick=\"add_to_orderdetails($orderId , $bookId_json)\">Submit</button>";
+    
+    echo "<p id=\"add_to_orderdetails_response\"></p>";
+
+
+    $customerId = "1";
+    
+    echo "<h2>Table: Orders</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>Orders_orderDate</label>
+             <input type=\"date\" name=\"orderDate\" id=\"orderDate_insert\"><br>
+             <label>Orders_status</label>
+             <input type=\"text\" name=\"status\" id=\"status_insert\"><br>
+             <label>Orders_extraDetails</label>
+             <input type=\"text\" name=\"extraDetails\" id= \"extraDetails_insert\"><br>
+             <label>Orders_promoCode</label>
+             <input type=\"text\" name=\"promoCode\" id=\"promoCode_insert\"><br>
+             <label>Orders_paymentMethod</label>
+             <input type=\"text\" name=\"paymentMethod\" id=\"paymentMethod_insert\"><br>
+             <label>Orders_totalPrice</label>
+             <input type=\"number\" name=\"totalPrice\" id=\"totalPrice_insert\" step=\"0.01\"><br>
+             <label>Orders_discount</label>
+             <input type=\"number\" name=\"discount\" id=\"discount_insert\" step=\"0.01\"><br>
+             <label>Orders_finalPrice</label>
+             <input type=\"number\" name=\"finalPrice\" id=\"finalPrice_insert\" step=\"0.01\"><br>
+             <label>Orders_currency</label>
+             <input type=\"text\" name=\"currency\" id=\"currency_insert\"><br>
+
+             </form>
+            <button onclick=\"add_to_orders($customerId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_orders_response\"></p>";
+
+
    ?>
 
     <h1>Testing - Update</h1>
@@ -354,6 +581,21 @@ include "../debug/chromephp-master/ChromePhp.php";
     <!-- ==== Testing components - update ==== 
     ======================================== --> 
     <?php
+
+$bookId = "1234567891012";
+$bookId_json = "'1234567891012'";
+$orderId = "6";
+
+print "<h3>update orderdetails</h3>
+        <p>Existing bookId = $bookId</p>
+        <p>Existing orderId = $orderId</p>
+        <form>
+            New Quantity: <input type=\"number\" name=\"quantity\" id=\"${bookId}_quantity_update_orderdetails\" value=\"1\"><br>
+        </form>
+        <button onclick=\"update_in_orderdetails($orderId, $bookId_json)\">Submit</button>";
+
+echo "<p id=\"update_in_orderdetails_response\"></p>";
+
     print "<h1>Update Database Tables</h1>";
     echo "<h2>Table: Cart</h2>";
 
@@ -397,7 +639,22 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"update_in_publisher_response\"></p>";
 
-    echo "<h2>Table: Books</h2>";
+    echo "<h2>Table: Genre</h2>";
+    
+    $genreid = "1";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing id = $genreid</p>
+            <form>
+                New Type: <input type=\"text\" name=\"type\" id=\"genre_type_update\"><br>
+            </form>
+            <button onclick=\"update_in_genre($genreid)\">Submit</button>";
+
+    echo "<p id=\"update_in_genre_response\"></p>";
+
+
+
+    echo "<h2>Table: Books</h2>";  
 
     $isbn = "123ABC";
     $isbn_json = "'123ABC'";
@@ -419,7 +676,34 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"update_in_books($isbn_json, $publisherId)\">Submit</button>";
 
             echo "<p id=\"update_in_books_response\"></p>";
-    
+ 
+            echo "<h2>Table: orders</h2>";
+
+            $customerId = "1";
+            $id = "6";
+        
+            print "<h3>Via Button with pre-defined values</h3>
+                    <p>customerId = $customerId</p> 
+                    <p>Id = $id</p> 
+
+                    <form>
+                     New orderDate: <input type=\"date\" name=\"orderDate\" id=\"orderDate_updated\"><br>
+                     New status: <input type=\"text\" name=\"status\" id=\"status_updated\"><br>
+                     New extraDetails: <input type=\"text\" name=\"extraDetails\"id=\"extraDetails_updated\"><br>
+                     New promoCode:<input type=\"text\" name=\"promoCode\" id=\"promoCode_updated\"><br>
+                     New paymentMethod: <input type=\"text\" name=\"paymentMethod\" id=\"paymentMethod_updated\"><br>
+                     New totalPrice: <input type=\"number\" name=\"totalPrice\" id=\"totalPrice_updated\" step=\"0.01\"><br>
+                     New discount: <input type=\"number\" name=\"discount\" id=\"discount_updated\" step=\"0.01\"><br>
+                     New finalPrice: <input type=\"number\" name=\"finalPrice\" id=\"finalPrice_updated\" step=\"0.01\"><br>
+                     New currency: <input type=\"text\" name=\"currency\" id=\"currency_updated\"><br>
+
+                     </form>
+                    <button onclick=\"update_in_orders($customerId, $id)\">Submit</button>";
+        
+                    echo "<p id=\"update_in_orders_response\"></p>";
+         
+
+
     echo "<h2>Table: Author</h2>";
     
      $id = 2;
@@ -443,6 +727,23 @@ include "../debug/chromephp-master/ChromePhp.php";
     <!-- ==== Testing components - select ==== 
     ======================================== --> 
     <?php
+
+$orderId = "6";
+ 
+print "<h3>orderdetails</h3>
+        <p>Existing order Id = $orderId</p>
+        <button onclick=\"select_from_orderdetails($orderId)\">Submit</button>";
+
+echo "<p id=\"select_from_orderdetails_response\"></p>";
+
+$customerId = "1";
+
+print "<h3>orders</h3>
+        <p>Existing customer Id = $customerId</p>
+        <button onclick=\"select_from_orders($customerId)\">Submit</button>";
+
+echo "<p id=\"select_from_orders_response\"></p>";
+
     print "<h1>Select Database Tables</h1>";
     echo "<h2>Table: Cart</h2>";
 
@@ -474,6 +775,17 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"select_from_publisher($id)\">Submit</button>";
 
     echo "<p id=\"select_from_publisher_response\"></p>";
+
+
+    echo "<h2>Table: Genre</h2>";
+    
+    $id = "1";
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing genre id = $id</p>
+            <button onclick=\"select_from_genre($id)\">Submit</button>";
+
+    echo "<p id=\"select_from_genre_response\"></p>";
+
 
     echo "<h2>Table: Books</h2>";
     $isbn = "123ABC";
