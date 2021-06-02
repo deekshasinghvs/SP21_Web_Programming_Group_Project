@@ -236,6 +236,23 @@ include "../debug/chromephp-master/ChromePhp.php";
             // Calls below function in the ajax/ajax.js file 
             show_author(data);
         }
+    function select_from_bookpreview(id, queryBy)
+        {                        
+            var key = queryBy
+            var data = {"queryBy": queryBy.toString()}; 
+            
+            if(key != "isbn")
+            {
+                data[key] = parseInt(id);
+            }
+            else
+            {
+                data[key] = id;
+            }
+
+            // Calls below function in the ajax/ajax.js file 
+            show_bookpreview(data);
+        }
 
 
 
@@ -437,6 +454,7 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"select_from_cart_response\"></p>";
 
+
    
     echo "<h2>Table: Category</h2>";
     $id = 1;
@@ -475,6 +493,27 @@ include "../debug/chromephp-master/ChromePhp.php";
             <button onclick=\"select_from_author($id)\">Submit</button>";
 
     echo "<p id=\"select_from_author_response\"></p>";
+
+    print "<h1>Select Database Tables</h1>";
+    echo "<h2>Table: bookpreview</h2>";
+
+    $isbn = "'1'";
+    $publisherId  = "1";
+    $categoryId = "1";
+ 
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing isbn = $isbn</p>
+            <button onclick=\"select_from_bookpreview($isbn, 'isbn')\">Submit</button>";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing publisherId = $publisherId</p>
+            <button onclick=\"select_from_bookpreview($publisherId, 'publisherId')\">Submit</button>";
+
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing categoryId = $categoryId</p>
+            <button onclick=\"select_from_bookpreview($categoryId, 'categoryId')\">Submit</button>";
+
+    echo "<p id=\"select_from_bookpreview_response\"></p>";
 
 
     ?>

@@ -357,6 +357,57 @@ function display_show_books_response(x,y,z)
 
 	}
 }
+function show_bookpreview(data) 
+{
+	var data_encoded = {'bookpreview_select_input_query':  JSON.stringify(data)};
+
+	$("#select_from_bookpreview_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_bookpreview.php",
+			data: data_encoded,
+			success: display_show_bookpreview_response
+		   });
+}
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_bookpreview_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+
+	// $("#select_from_bookpreview_response").append(o[0].isbn.toString());
+	
+	var json = o[0];
+	var keys = [];
+
+	html_table = "<table class=\"table\" id=\"custtablebookpreview\"><thead><tr>";
+	
+	keys = Object.keys(json);
+	
+	for(k in keys) 
+	{
+		// keys.append(k.toString());
+		html_table += ("<th>" + keys[k].toString() + "</th>");
+	}
+	html_table += "</tr></thead><tbody></tbody></table>";
+
+	$("#select_from_bookpreview_response").append(html_table);
+
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = "<tr>";
+
+		for (k in keys)
+		{
+			t += ('<td>'+ (o[i])[keys[k]] +'</td><td>');
+		}
+		t += "</tr>"
+
+		$('#custtablebookpreview TBODY').append(t);
+	}
+}
+
+
 
 
 function show_author(data) 
