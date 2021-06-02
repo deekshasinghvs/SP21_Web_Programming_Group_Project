@@ -1,14 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3307
--- Generation Time: May 31, 2021 at 09:11 AM
--- Server version: 5.7.32
--- PHP Version: 8.0.0
+-- Host: localhost
+-- Generation Time: Jun 02, 2021 at 08:41 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `bookstore`
@@ -28,6 +35,14 @@ CREATE TABLE `author` (
   `secondName` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `author`
+--
+
+INSERT INTO `author` (`id`, `firstName`, `secondName`) VALUES
+(3, 'first1', 'last1'),
+(4, 'first2', 'last2');
+
 -- --------------------------------------------------------
 
 --
@@ -38,6 +53,14 @@ CREATE TABLE `bookauthors` (
   `bookId` varchar(13) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `authorId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `bookauthors`
+--
+
+INSERT INTO `bookauthors` (`bookId`, `authorId`) VALUES
+('1', 3),
+('1', 4);
 
 -- --------------------------------------------------------
 
@@ -64,6 +87,30 @@ CREATE TABLE `bookgenre` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `bookpreview`
+-- (See below for the actual view)
+--
+CREATE TABLE `bookpreview` (
+`authorName` varchar(201)
+,`authorId` int(11)
+,`bookId` varchar(13)
+,`isbn` varchar(13)
+,`title` varchar(200)
+,`description` varchar(500)
+,`price` float
+,`categoryId` int(11)
+,`previewLink` varchar(500)
+,`edition` int(2)
+,`publicationDate` date
+,`publisherId` int(11)
+,`displayImage` varchar(500)
+,`type` varchar(100)
+,`name` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `books`
 --
 
@@ -85,6 +132,7 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`isbn`, `title`, `description`, `price`, `categoryId`, `previewLink`, `publicationDate`, `edition`, `publisherId`, `displayImage`) VALUES
+('1', 'testing book title 1', 'testing book description 1', 1, 1, 'www.example.com', '2021-05-28', 1, 1, NULL),
 ('1234567891012', 'testing book title 1', 'testing book description 1', 1, 1, 'www.example.com', '2021-05-28', 1, 1, NULL);
 
 -- --------------------------------------------------------
@@ -96,7 +144,7 @@ INSERT INTO `books` (`isbn`, `title`, `description`, `price`, `categoryId`, `pre
 CREATE TABLE `cart` (
   `customerId` int(11) NOT NULL,
   `bookId` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
-  `quantity` int(4) NOT NULL DEFAULT '1'
+  `quantity` int(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -104,7 +152,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`customerId`, `bookId`, `quantity`) VALUES
-(1, '1234567891012', 2);
+(1, '1234567891012', 3);
 
 -- --------------------------------------------------------
 
@@ -173,14 +221,14 @@ CREATE TABLE `customers` (
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `username` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `passwordencrypted` varchar(42) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isAdmin` tinyint(1) NOT NULL DEFAULT '0',
-  `emailVerified` tinyint(1) NOT NULL DEFAULT '0',
-  `phoneVerified` tinyint(1) NOT NULL DEFAULT '0',
-  `registrationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lastOnline` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT 0,
+  `emailVerified` tinyint(1) NOT NULL DEFAULT 0,
+  `phoneVerified` tinyint(1) NOT NULL DEFAULT 0,
+  `registrationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `lastOnline` datetime NOT NULL DEFAULT current_timestamp(),
   `referralCode` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `referredBy` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `dataStoragePermission` tinyint(1) NOT NULL DEFAULT '0',
+  `dataStoragePermission` tinyint(1) NOT NULL DEFAULT 0,
   `dob` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -225,7 +273,7 @@ CREATE TABLE `genre` (
 CREATE TABLE `guestcart` (
   `sessionId` int(11) NOT NULL,
   `bookId` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
-  `quantity` int(4) NOT NULL DEFAULT '1'
+  `quantity` int(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -237,7 +285,7 @@ CREATE TABLE `guestcart` (
 CREATE TABLE `orderdetails` (
   `id` int(11) NOT NULL,
   `orderId` int(11) NOT NULL,
-  `quantity` int(4) NOT NULL DEFAULT '1',
+  `quantity` int(4) NOT NULL DEFAULT 1,
   `bookId` varchar(13) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -250,7 +298,7 @@ CREATE TABLE `orderdetails` (
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `customerId` int(11) NOT NULL,
-  `orderDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `orderDate` datetime NOT NULL DEFAULT current_timestamp(),
   `status` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `extraDetails` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `promoCode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -291,7 +339,7 @@ CREATE TABLE `ratings` (
   `rating` float NOT NULL,
   `bookId` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
   `customerId` int(11) NOT NULL,
-  `dateUpdated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `dateUpdated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -311,7 +359,7 @@ CREATE TABLE `reviews` (
   `id` int(11) NOT NULL,
   `ratingId` int(11) NOT NULL,
   `review` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dateUpdated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `dateUpdated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -333,8 +381,17 @@ CREATE TABLE `sessions` (
 CREATE TABLE `wishlist` (
   `customerId` int(11) NOT NULL,
   `bookId` varchar(13) COLLATE utf8_unicode_ci NOT NULL,
-  `dateAdded` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `dateAdded` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `bookpreview`
+--
+DROP TABLE IF EXISTS `bookpreview`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bookpreview`  AS SELECT `t2`.`authorName` AS `authorName`, `t2`.`authorId` AS `authorId`, `t2`.`bookId` AS `bookId`, `t3`.`isbn` AS `isbn`, `t3`.`title` AS `title`, `t3`.`description` AS `description`, `t3`.`price` AS `price`, `t3`.`categoryId` AS `categoryId`, `t3`.`previewLink` AS `previewLink`, `t3`.`edition` AS `edition`, `t3`.`publicationDate` AS `publicationDate`, `t3`.`publisherId` AS `publisherId`, `t3`.`displayImage` AS `displayImage`, `t3`.`type` AS `type`, `t3`.`name` AS `name` FROM ((select concat(concat(`author`.`secondName`,','),`author`.`firstName`) AS `authorName`,`bookauthors`.`authorId` AS `authorId`,`bookauthors`.`bookId` AS `bookId` from (`author` left join `bookauthors` on(`author`.`id` = `bookauthors`.`authorId`))) `t2` left join (select `t1`.`isbn` AS `isbn`,`t1`.`title` AS `title`,`t1`.`description` AS `description`,`t1`.`price` AS `price`,`t1`.`categoryId` AS `categoryId`,`t1`.`previewLink` AS `previewLink`,`t1`.`edition` AS `edition`,`t1`.`publicationDate` AS `publicationDate`,`t1`.`publisherId` AS `publisherId`,`t1`.`displayImage` AS `displayImage`,`t1`.`type` AS `type`,`category`.`name` AS `name` from ((select `books`.`isbn` AS `isbn`,`books`.`title` AS `title`,`books`.`description` AS `description`,`books`.`price` AS `price`,`books`.`categoryId` AS `categoryId`,`books`.`previewLink` AS `previewLink`,`books`.`edition` AS `edition`,`books`.`publicationDate` AS `publicationDate`,`books`.`publisherId` AS `publisherId`,`books`.`displayImage` AS `displayImage`,`publisher`.`type` AS `type` from (`books` left join `publisher` on(`books`.`publisherId` = `publisher`.`id`))) `t1` left join `category` on(`t1`.`categoryId` = `category`.`id`))) `t3` on(`t2`.`bookId` = `t3`.`isbn`)) ;
 
 --
 -- Indexes for dumped tables
@@ -484,7 +541,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -582,3 +639,8 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `contactus`
   ADD CONSTRAINT `contactus_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customers` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
