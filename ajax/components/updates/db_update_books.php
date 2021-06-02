@@ -74,7 +74,7 @@ ChromePhp::log("\ntitle=$title");
 $description = $update_input_query->description;
 ChromePhp::log("\ndescription=$description");
 
-$price = number_format($update_input_query->price);
+$price = number_format($update_input_query->price, 2);
 ChromePhp::log("\nprice=$price");
 
 $categoryId = number_format($update_input_query->categoryId);
@@ -109,7 +109,7 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("sssdissiis", $isbn, $title, $description, $price, $categoryId, $previewLink, $publicationDate, $edition, $publisherId, $displayImage);
+$stmt->bind_param("ssdississi", $title, $description, $price, $categoryId, $previewLink, $publicationDate, $edition, $displayImage, $isbn, $publisherId,);
 
 ChromePhp::log("Parameters Bound");
 

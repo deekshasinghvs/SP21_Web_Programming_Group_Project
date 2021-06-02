@@ -115,6 +115,49 @@ function display_add_author_response(x,y,z)
 	$("#add_to_author_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
+function add_bookauthors(data)  
+{
+	var data_encoded = {'bookauthors_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_bookauthors_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_bookauthors.php",
+			data: data_encoded,
+			success: display_add_bookauthors_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_bookauthors_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_bookauthors_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
+
+function add_customers(data)  
+{
+	var data_encoded = {'customers_insert_input_query':  JSON.stringify(data)};
+
+	$("#add_to_customers_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/inserts/db_insert_customers.php",
+			data: data_encoded,
+			success: display_add_customers_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_add_customers_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#add_to_customers_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+}
 
 
 
@@ -385,6 +428,36 @@ function display_show_author_response(x,y,z)
 		var t = '<tr><td>'+ o[i].id +'</td><td>'+ o[i].firstName+'</td><td>'+o[i].secondName+'</td><td>';
 
 		$('#custtableauthor TBODY').append(t);
+
+	}
+}
+
+function show_bookauthors(data) 
+{
+	var data_encoded = {'bookauthors_select_input_query':  JSON.stringify(data)};
+
+	$("#select_from_category_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_bookauthors.php",
+			data: data_encoded,
+			success: display_show_bookauthors_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_bookauthors_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+	
+	$("#select_from_bookauthors_response").html('<table class="table" id="custtablebookauthors"><thead><tr><th>bookId</th><th>authorId</th></tr></thead><tbody></tbody></table>');
+	
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = '<tr><td>'+ o[i].bookId+'</td><td>'+ o[i].authorId+'</td><td>';
+
+		$('#custtablebookauthors TBODY').append(t);
 
 	}
 }

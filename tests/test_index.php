@@ -113,7 +113,67 @@ include "../debug/chromephp-master/ChromePhp.php";
         // Calls below function in the ajax/ajax.js file
         add_author(data); 
     }
+    function add_to_bookauthors(bookId, authorId)
+    {
+                                
+        var data = {"bookId": bookId, 
+                    "authorId": authorId
+                    };
 
+        // Calls below function in the ajax/ajax.js file
+        add_bookauthors(data); 
+    }
+    function add_to_customers()
+    {
+        var id = $("#id_insert").val();
+        var email = $("#email_insert").val();
+        var firstName = $("#firstName_insert").val();
+        var lastName = $("#lastName_insert").val();
+        var postalCode = $("#postalCode_insert").val();
+        var street = $("#street_insert").val();
+        var addressLine1 = $("#addressLine1_insert").val();
+        var addressLine2 = $("#addressLine2_insert").val();
+        var city = $("#city_insert").val();
+        var country = $("#country_insert").val();
+        var phone = $("#phone_insert").val();
+        var username = $("#userName_insert").val();
+        var passwordEncrypted = $("#passwordEncrypted_insert").val();
+        var isAdmin = $("#isAdmin_insert").val();
+        var emailVerified = $("#emailVerified_insert").val();
+        var phoneVerified = $("#phoneVerified_insert").val();
+        var registrationDate = $("#registrationDate_insert").val();
+        var lastOnline = $("#lastOnline_insert").val();
+        var referralCode = $("#referralCode_insert").val();
+        var referredBy = $("#referredBy_insert").val();
+        var dataStoragePermission = $("#dataStoragePermission_insert").val();
+        var dob = $("#dob_insert").val();
+        
+             var data = {"id": id, 
+                        "email":email,
+                        "firstName": firstName,
+                        "lastName": lastName,
+                        "postalCode":postalCode,
+                        "street":street,
+                        "addressLine1":addressLine1,
+                        "addressLine2":addressLine2,
+                        "city": city,
+                        "country":country,
+                        "phone":phone,
+                        "username":username,
+                        "passwordEncrypted":passwordEncrypted,
+                        "isAdmin":isAdmin,
+                        "emailVerified":emailVerified,
+                        "phoneVerified":phoneVerified,
+                        "registrationDate":registrationDate,
+                        "lastOnline":lastOnline,
+                        "referralCode":referralCode,
+                        "referredBy":referredBy,
+                        "dataStoragePermission":dataStoragePermission,
+                        "dob":dob
+                    };
+        // Calls below function in the ajax/ajax.js file
+        add_customers(data);
+     }
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
@@ -155,7 +215,7 @@ include "../debug/chromephp-master/ChromePhp.php";
         update_publisher(data); 
     }
 
-    function update_in_books(isbn_json, publisherId)
+    function update_in_books(isbn, publisherId)
     {
         var title = $("#title_updated").val();
         var description = $("#decription_updated").val();
@@ -166,20 +226,21 @@ include "../debug/chromephp-master/ChromePhp.php";
         var edition = $("#edition_updated").val();
         var displayImage = $("#displayImage_updated").val();
                                 
-        var data = {"isbn": isbn_json, 
+        var data = {"isbn": isbn, 
                     "title": title,
                     "description": description,
-                    "price": price,
-                    "categoryId":categoryId,
+                    "price": parseFloat (price),
+                    "categoryId":parseInt(categoryId),
                     "previewLink": previewLink,
                     "publicationDate": publicationDate,
-                    "edition": edition,
-                    "publisherId": publisherId,
+                    "edition": parseInt(edition),
+                    "publisherId": parseInt(publisherId),
                     "displayImage": displayImage
                     };
         // Calls below function in the ajax/ajax.js file 
         update_books(data); 
     }
+
 
     function update_in_author(id)
     {
@@ -193,8 +254,6 @@ include "../debug/chromephp-master/ChromePhp.php";
         // Calls below function in the ajax/ajax.js file 
         update_author(data); 
     }
-
-
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
@@ -237,7 +296,14 @@ include "../debug/chromephp-master/ChromePhp.php";
             show_author(data);
         }
 
+    function select_from_bookauthors( input_value, queryFor, input_key)
+        {                        
+            var data = {"queryFor": queryFor}
+            data[input_key] = input_value;
 
+            // Calls below function in the ajax/ajax.js file 
+            show_bookauthors(data); 
+        }
 
     </script>
   </head>
@@ -320,15 +386,80 @@ include "../debug/chromephp-master/ChromePhp.php";
 
         echo "<p id=\"add_to_books_response\"></p>";
 
-        echo "<h2>Table: Author</h2>";
+    echo "<h2>Table: Author</h2>";
     
     print "<form>
         	    New Author First Name: <input type=\"text\" name=\"firstName\" id=\"firstName_insert\"><br>
                 New Author Second Name: <input type=\"text\" name=\"secondName\" id=\"secondName_insert\"><br>
             </form>
             <button onclick=\"add_to_author()\">Submit</button>";
-    
+
     echo "<p id=\"add_to_author_response\"></p>";
+
+    echo "<h2>Table: Bookauthors</h2>";
+
+    $bookId = "1234567891012";
+    $bookId_json = "'1234567891012'";
+    $authorId = "1";
+    
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing bookid = $bookId</p>
+            <p>Existing authorid = $authorId</p>
+            <button onclick=\"add_to_bookauthors($bookId_json, $authorId)\">Submit</button>";
+    
+    echo "<p id=\"add_to_bookauthors_response\"></p>";
+
+    echo "<h2>Table: Customers</h2>";
+    print "<h3>Via Form</h3>
+             <form>
+             <label>ID</label>
+             <input type=\"number\" name=\"id\" id=\"id_insert\"><br>
+             <label>Email</label>
+             <input type=\"text\" name=\"email\" id=\"email_insert\"><br>
+             <label>First_Name</label>
+             <input type=\"text\" name=\"firstName\" id= \"firstName_insert\"><br>
+             <label>LastName</label>
+             <input type=\"text\" name=\"LastName\" id=\"lastName_insert\"><br>
+             <label>PostalCode</label>
+             <input type=\"number\" name=\"postalCode\" id=\"postalCode_insert\"><br>
+             <label>Street</label>
+             <input type=\"text\" name=\"street\" id=\"street_insert\"><br>
+             <label>Address_Line1</label>
+             <input type=\"text\" name=\"addressLine1\" id=\"addressLine1_insert\"><br>
+             <label>Address_Line2</label>
+             <input type=\"text\" name=\"addressLine2\" id=\"addressLine2_insert\"><br>
+             <label>City</label>
+             <input type=\"text\" name=\"city\" id=\"city_insert\"><br>
+             <label>Country</label>
+             <input type=\"text\" name=\"counrty\" id=\"country_insert\"><br>
+             <label>Phone_number</label>
+             <input type=\"text\" name=\"phone\" id=\"phone_insert\"><br>
+             <label>User_Name</label>
+             <input type=\"text\" name=\"userName\" id=\"userName_insert\"><br>
+             <label>Password</label>
+             <input type=\"text\" name=\"passwordEncrypted\" id=\"passwordEncrypted_insert\"><br>
+             <label>Is_Admin</label>
+             <input type=\"number\" name=\"isAdmin\" id=\"isAdmin_insert\"><br>
+             <label>emailVerified</label>
+             <input type=\"number\" name=\"emailVerified\" id=\"emailVerified_insert\"><br>
+             <label>phoneVerified</label>
+             <input type=\"number\" name=\"phoneVerified\" id=\"phoneVerified_insert\"><br>
+             <label>RegistrationDate</label>
+             <input type=\"datetime-local\" name=\"registrationDate\" id=\"registrationVerified_insert\"><br>
+             <label>LastOnline</label>
+             <input type=\"datetime-local\" name=\"lastOnline\" id=\"lastOnline_insert\"><br>
+             <label>ReferralCode</label>
+             <input type=\"text\" name=\"referralCode\" id=\"referralCode_insert\"><br>
+             <label>ReferredBy</label>
+             <input type=\"text\" name=\"referredBy\" id=\"referredBy_insert\"><br>
+             <label>Permission_for_Data_Storage</label>
+             <input type=\"number\" name=\"dataStoragePermission\" id=\"dataStoragePermission_insert\"><br>
+             <label>dob</label>
+             <input type=\"date\" name=\"dob\" id=\"dob_insert\"><br>
+            </form>
+            <button onclick=\"add_to_customers()\">Submit</button>";
+
+        echo "<p id=\"add_to_customers_response\"></p>";
 
    ?>
 
@@ -405,7 +536,7 @@ include "../debug/chromephp-master/ChromePhp.php";
     
     echo "<h2>Table: Author</h2>";
     
-     $id = 2;
+     $id = "3";
                
          print "<h3>Via Button with pre-defined values</h3>
         <p>Existing id = $id</p>
@@ -476,11 +607,34 @@ include "../debug/chromephp-master/ChromePhp.php";
 
     echo "<p id=\"select_from_author_response\"></p>";
 
+    echo "<h2>Table:Book_Authors</h2>";
+    
+    $id = "3";
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing author id = $id</p>
+            <button onclick=\"select_from_author($id)\">Submit</button>";
+
+    echo "<p id=\"select_from_author_response\"></p>";
+
+   
+    echo "<h2>Table: Bookauthors</h2>";
+    
+    $bookId = "'1234567891012'";
+    $authorId = "1";
+    // $queryValue = $bookId;
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing book id = $bookId</p>
+            <p> have the book, want the author(s)</p>
+            <button onclick=\"select_from_bookauthors($bookId, 'authorId', 'bookId')\">Submit</button>";
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing author id = $authorId</p>
+            <p>hhave the author, want the book(s)</p>
+            <button onclick=\"select_from_bookauthors($authorId, 'bookId', 'authorId')\">Submit</button>";
+
+    echo "<p id=\"select_from_bookauthors_response\"></p>";
+
 
     ?>
-
-
-
 
 
 

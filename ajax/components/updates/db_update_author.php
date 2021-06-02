@@ -69,7 +69,7 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("iss", $id, $firstName, $secondName);
+$stmt->bind_param("ssi",$firstName, $secondName, $id);
 
 ChromePhp::log("Parameters Bound");
 
