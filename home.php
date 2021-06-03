@@ -19,6 +19,7 @@ if( ! isset($_SESSION['is_admin'])) {
     <!-- Custom styles for this template -->
     <link href="bootstrap/dashboard.css" rel="stylesheet">
     <script src="js/ajax.js"></script>
+    <script src="js/home.js"></script>
 
         <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -28,6 +29,7 @@ if( ! isset($_SESSION['is_admin'])) {
     <script src="bootstrap/bootstrap.min.js"></script>
 
     <script> 
+
     $(function(){
       // $("#section").load("internal/home/index.html");  
       $("#footer").load("internal/footer.php"); 
@@ -65,8 +67,8 @@ if( ! isset($_SESSION['is_admin'])) {
 
   <body> 
     <?php
-      $_SESSION['username'] = "?";
-      $_SESSION['is_admin'] = 1;
+      $_SESSION['username'] = "john";
+      $_SESSION['is_admin'] = 0;
       
       $header_type = "";
       if($_SESSION['is_admin'] == 1)
@@ -104,7 +106,15 @@ if( ! isset($_SESSION['is_admin'])) {
 
       // $pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
 
-      $pages = array('blog','home','login','logout','myinfo','contact','books','cart','catinfo','add_cart','empty_cart','buy_cart');
+      $pages = array('blog','home','login','logout','myinfo','contact','books','cart','catinfo','add_cart','empty_cart','buy_cart', 'search');
+
+
+      if(isset($_REQUEST['query']) && $_REQUEST['p']=='search') 
+      {
+        $_REQUEST['query'] = "'" . $_REQUEST['query'] . "'";
+        require "internal/search.php";
+      }
+
 
       $ok=false;
       foreach($pages as $pp) {
