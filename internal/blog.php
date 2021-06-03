@@ -1,1 +1,1 @@
-<h1>This is the eshop blog page </h1>
+<?php require "blog/index.html" ?>
