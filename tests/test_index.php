@@ -331,6 +331,40 @@ include "../debug/chromephp-master/ChromePhp.php";
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
+function select_from_bookpreview(id, queryBy)
+        {                        
+            var key = queryBy
+            var data = {"queryBy": queryBy.toString()}; 
+            
+            if(key != "isbn")
+            {
+                data[key] = parseInt(id);
+            }
+            else
+            {
+                data[key] = id;
+            }
+
+            // Calls below function in the ajax/ajax.js file 
+            show_bookpreview(data);
+        }
+
+
+    function search_select_from_bookpreview()
+    {
+        var query = $("#bookpreview_search_select").val();
+        var data = {"query": query,
+                    "orderBy" : $("#bookpreview_search_select_orderBy").val(),
+                    "limit": parseInt($("#bookpreview_search_select_limit").val()),
+                    "offset": parseInt($("#bookpreview_search_select_offset").val())
+        };
+
+        // Calls below function in the ajax/ajax.js file 
+        search_bookpreview(data); 
+    }
+
+
+
     function select_from_cart(customerid)
         {                        
             var data = {"customerid": customerid};
@@ -815,6 +849,21 @@ include "../debug/chromephp-master/ChromePhp.php";
         <button onclick=\"select_from_reviews($id)\">Submit</button>";
 
     echo "<p id=\"select_from_reviews_response\"></p>";
+
+
+    echo "<h2>Table: Search BookPreview</h2>";
+    print "<h3>Via Button with pre-defined values</h3>
+            <form>
+                New Query: <input type=\"text\" name=\"type\" id=\"bookpreview_search_select\"><br>
+                New orderBy: <input type=\"text\" name=\"type\" id=\"bookpreview_search_select_orderBy\"><br>
+                New offset: <input type=\"number\" name=\"type\" id=\"bookpreview_search_select_offset\"><br>
+                New limit: <input type=\"number\" name=\"type\" id=\"bookpreview_search_select_limit\"><br>
+            </form>
+            <button onclick=\"search_select_from_bookpreview()\">Submit</button>";
+
+    echo "<p id=\"search_select_from_bookpreview_response\"></p>";
+
+
 
     ?>
 
