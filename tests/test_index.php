@@ -116,19 +116,6 @@ function add_to_orderdetails(orderId, bookId)
         add_publisher(data); 
     }
 
-    // function add_to_bookgenre()
-    // {
-    //     var type = $("#bookgenre_insert").val();
-                                
-    //     var data = {"genreId": genreId, 
-    //                 "bookId": bookId,
-    //                 };
-
-    //     // Calls below function in the ajax/ajax.js file
-    //     add_bookgenre(data); 
-    // }
-
-
 
 
     function add_to_genre()
@@ -202,21 +189,22 @@ function add_to_orderdetails(orderId, bookId)
         // Calls below function in the ajax/ajax.js file
         add_bookauthors(data); 
     }
+
     function add_to_customers()
     {
         var id = $("#id_insert").val();
         var email = $("#email_insert").val();
-        var firstName = $("#firstName_insert").val();
+        var firstName = $("#firstName_insert_cust").val();
         var lastName = $("#lastName_insert").val();
         var postalCode = $("#postalCode_insert").val();
         var street = $("#street_insert").val();
-        var addressLine1 = $("#addressLine1_insert").val();
+        var addessLine1 = $("#addessLine1_insert").val();
         var addressLine2 = $("#addressLine2_insert").val();
         var city = $("#city_insert").val();
         var country = $("#country_insert").val();
         var phone = $("#phone_insert").val();
         var username = $("#userName_insert").val();
-        var passwordEncrypted = $("#passwordEncrypted_insert").val();
+        var passwordencrypted = $("#passwordencrypted_insert").val();
         var isAdmin = $("#isAdmin_insert").val();
         var emailVerified = $("#emailVerified_insert").val();
         var phoneVerified = $("#phoneVerified_insert").val();
@@ -233,13 +221,13 @@ function add_to_orderdetails(orderId, bookId)
                         "lastName": lastName,
                         "postalCode":postalCode,
                         "street":street,
-                        "addressLine1":addressLine1,
+                        "addessLine1":addessLine1,
                         "addressLine2":addressLine2,
                         "city": city,
                         "country":country,
                         "phone":phone,
                         "username":username,
-                        "passwordEncrypted":passwordEncrypted,
+                        "passwordencrypted":passwordencrypted,
                         "isAdmin":isAdmin,
                         "emailVerified":emailVerified,
                         "phoneVerified":phoneVerified,
@@ -253,6 +241,7 @@ function add_to_orderdetails(orderId, bookId)
         // Calls below function in the ajax/ajax.js file
         add_customers(data);
      }
+  
 // ======================================================
 // JS functions for updating a row in the databse 
 // =======================================================
@@ -330,7 +319,7 @@ function update_in_orderdetails(orderId, bookId)
         var edition = $("#edition_updated").val();
         var displayImage = $("#displayImage_updated").val();
                                 
-        var data = {"isbn": isbn, 
+        var data = {"isbn": isbn_json, 
                     "title": title,
                     "description": description,
                     "price": parseFloat (price),
@@ -384,6 +373,58 @@ function update_in_orderdetails(orderId, bookId)
         // Calls below function in the ajax/ajax.js file 
         update_author(data); 
     }
+
+    function update_in_customers(id)
+    {
+        var email = $("#email_update").val();
+        var firstName = $("#firstName_update_cust").val();
+        var lastName = $("#lastName_update").val();
+        var postalCode = $("#postalCode_update").val();
+        var street = $("#street_update").val();
+        var addessLine1 = $("#addessLine1_update").val();
+        var addressLine2 = $("#addressLine2_update").val();
+        var city = $("#city_update").val();
+        var country = $("#country_update").val();
+        var phone = $("#phone_update").val();
+        var username = $("#userName_update").val();
+        var passwordencrypted = $("#passwordencrypted_update").val();
+        var isAdmin = $("#isAdmin_update").val();
+        var emailVerified = $("#emailVerified_update").val();
+        var phoneVerified = $("#phoneVerified_update").val();
+        //var registrationDate = $("#registrationDate_update").val();
+        var lastOnline = $("#lastOnline_update").val();
+        var referralCode = $("#referralCode_update").val();
+        var referredBy = $("#referredBy_update").val();
+        var dataStoragePermission = $("#dataStoragePermission_update").val();
+        var dob = $("#dob_update").val();
+        
+            var data = {"id": parseInt(id), 
+                        "email":email,
+                        "firstName": firstName,
+                        "lastName": lastName,
+                        "postalCode":parseInt(postalCode),
+                        "street":street,
+                        "addessLine1":addessLine1,
+                        "addressLine2":addressLine2,
+                        "city": city,
+                        "country":country,
+                        "phone":phone,
+                        "username":username,
+                        "passwordencrypted":passwordencrypted,
+                        "isAdmin":parseInt(isAdmin),
+                        "emailVerified":parseInt(emailVerified),
+                        "phoneVerified":parseInt(phoneVerified),
+                        //"registrationDate":registrationDate,
+                        "lastOnline":lastOnline,
+                        "referralCode":referralCode,
+                        "referredBy":referredBy,
+                        "dataStoragePermission":parseInt(dataStoragePermission),
+                        "dob":dob
+                    };
+        // Calls below function in the ajax/ajax.js file
+        update_customers(data);
+    }
+
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
@@ -492,6 +533,15 @@ function select_from_orderdetails(orderId)
         search_bookpreview(data); 
     }
 
+    function select_from_customers(id)
+    {                        
+            var data = {"id": parseInt(id)};
+
+            // Calls below function in the ajax/ajax.js file 
+            show_customers(data);
+    }
+
+
     </script>
   </head>
 <body>
@@ -555,16 +605,6 @@ function select_from_orderdetails(orderId)
     
     echo "<p id=\"add_to_genre_response\"></p>";
 
-    // echo "<h2>Table: ADD book Genre</h2>";
-    
-    // print "<form>
-    //     	    New genre id: <input type=\"text\" name=\"genre_id\" id=\"genreId\"><br>
-    //             New bookid: <input type=\"text\" name=\"bookid\" id=\"bookId\"><br>
-           
-    //             </form>
-    //         <button onclick=\"add_to_bookgenre()\">Submit</button>";
-    
-    // echo "<p id=\"add_to_genre_response\"></p>";
 
     echo "<h2>Table: Books</h2>";
     print "<h3>Via Form</h3>
@@ -619,13 +659,13 @@ function select_from_orderdetails(orderId)
 
     echo "<h2>Table: Customers</h2>";
     print "<h3>Via Form</h3>
-             <form>
+        <form>
              <label>ID</label>
              <input type=\"number\" name=\"id\" id=\"id_insert\"><br>
              <label>Email</label>
              <input type=\"text\" name=\"email\" id=\"email_insert\"><br>
              <label>First_Name</label>
-             <input type=\"text\" name=\"firstName\" id= \"firstName_insert\"><br>
+             <input type=\"text\" name=\"firstName\" id= \"firstName_insert_cust\"><br>
              <label>LastName</label>
              <input type=\"text\" name=\"LastName\" id=\"lastName_insert\"><br>
              <label>PostalCode</label>
@@ -633,7 +673,7 @@ function select_from_orderdetails(orderId)
              <label>Street</label>
              <input type=\"text\" name=\"street\" id=\"street_insert\"><br>
              <label>Address_Line1</label>
-             <input type=\"text\" name=\"addressLine1\" id=\"addressLine1_insert\"><br>
+             <input type=\"text\" name=\"addessLine1\" id=\"addessLine1_insert\"><br>
              <label>Address_Line2</label>
              <input type=\"text\" name=\"addressLine2\" id=\"addressLine2_insert\"><br>
              <label>City</label>
@@ -645,7 +685,7 @@ function select_from_orderdetails(orderId)
              <label>User_Name</label>
              <input type=\"text\" name=\"userName\" id=\"userName_insert\"><br>
              <label>Password</label>
-             <input type=\"text\" name=\"passwordEncrypted\" id=\"passwordEncrypted_insert\"><br>
+             <input type=\"text\" name=\"passwordencrypted\" id=\"passwordencrypted_insert\"><br>
              <label>Is_Admin</label>
              <input type=\"number\" name=\"isAdmin\" id=\"isAdmin_insert\"><br>
              <label>emailVerified</label>
@@ -653,7 +693,7 @@ function select_from_orderdetails(orderId)
              <label>phoneVerified</label>
              <input type=\"number\" name=\"phoneVerified\" id=\"phoneVerified_insert\"><br>
              <label>RegistrationDate</label>
-             <input type=\"datetime-local\" name=\"registrationDate\" id=\"registrationVerified_insert\"><br>
+             <input type=\"datetime-local\" name=\"registrationDate\" id=\"registrationDate_insert\"><br>
              <label>LastOnline</label>
              <input type=\"datetime-local\" name=\"lastOnline\" id=\"lastOnline_insert\"><br>
              <label>ReferralCode</label>
@@ -664,8 +704,8 @@ function select_from_orderdetails(orderId)
              <input type=\"number\" name=\"dataStoragePermission\" id=\"dataStoragePermission_insert\"><br>
              <label>dob</label>
              <input type=\"date\" name=\"dob\" id=\"dob_insert\"><br>
-            </form>
-            <button onclick=\"add_to_customers()\">Submit</button>";
+        </form>
+         <button onclick=\"add_to_customers()\">Submit</button>";
 
         echo "<p id=\"add_to_customers_response\"></p>";
     $bookId = "1234567891012";
@@ -720,6 +760,7 @@ function select_from_orderdetails(orderId)
     <!-- ==== Testing components - update ==== 
     ======================================== --> 
     <?php
+     print "<h1>Update Database Tables</h1>";
 
 $bookId = "1234567891012";
 $bookId_json = "'1234567891012'";
@@ -735,7 +776,7 @@ print "<h3>update orderdetails</h3>
 
 echo "<p id=\"update_in_orderdetails_response\"></p>";
 
-    print "<h1>Update Database Tables</h1>";
+   
     echo "<h2>Table: Cart</h2>";
 
     $bookid = "1234567891012";
@@ -858,6 +899,37 @@ echo "<p id=\"update_in_orderdetails_response\"></p>";
         echo "<p id=\"update_in_author_response\"></p>";
    
 
+    echo "<h2>Table: Customers</h2>";
+     $id = "4";
+                   
+         print "<h3>Via Button with pre-defined values</h3>
+        <p>Existing id = $id</p>
+                     <form>
+                     New Email: <input type=\"text\" name=\"email\" id=\"email_update\"><br>
+                     New_First_Name: <input type=\"text\" name=\"firstName\" id= \"firstName_update_cust\"><br>
+                     New_Last_Name: <input type=\"text\" name=\"LastName\" id=\"lastName_update\"><br>
+                     New_Postal_Code:<input type=\"number\" name=\"postalCode\" id=\"postalCode_update\"><br>
+                     New_Street:<input type=\"text\" name=\"street\" id=\"street_update\"><br>
+                     New_Addressline1: <input type=\"text\" name=\"addessLine1\" id=\"addessLine1_update\"><br>
+                     New_Addressline2:<input type=\"text\" name=\"addressLine2\" id=\"addressLine2_update\"><br>
+                     New_City: <input type=\"text\" name=\"city\" id=\"city_update\"><br>
+                     New_Country: <input type=\"text\" name=\"counrty\" id=\"country_update\"><br>
+                     New_Phone: <input type=\"text\" name=\"phone\" id=\"phone_update\"><br>
+                     New_UserName: <input type=\"text\" name=\"userName\" id=\"userName_update\"><br>
+                     New_Password: <input type=\"text\" name=\"passwordencrypted\" id=\"passwordencrypted_update\"><br>
+                     New_Admin_status: <input type=\"number\" name=\"isAdmin\" id=\"isAdmin_update\"><br>
+                     New_Email_status: <input type=\"number\" name=\"emailVerified\" id=\"emailVerified_update\"><br>
+                     New_Phone_status: <input type=\"number\" name=\"phoneVerified\" id=\"phoneVerified_update\"><br>
+                     New_Online_time: <input type=\"datetime-local\" name=\"lastOnline\" id=\"lastOnline_update\"><br>
+                     New_Referral_Code: <input type=\"text\" name=\"referralCode\" id=\"referralCode_update\"><br>
+                     New_referredby: <input type=\"text\" name=\"referredBy\" id=\"referredBy_update\"><br>
+                     New_Data_Storage_Permission: <input type=\"number\" name=\"dataStoragePermission\" id=\"dataStoragePermission_update\"><br>
+                     New_DOB: <input type=\"date\" name=\"dob\" id=\"dob_update\"><br>
+                    </form>
+                    <button onclick=\"update_in_customers($id)\">Submit</button>";
+        
+    echo "<p id=\"update_in_customers_response\"></p>";
+
 ?>
 
 
@@ -866,6 +938,7 @@ echo "<p id=\"update_in_orderdetails_response\"></p>";
     <!-- ==== Testing components - select ==== 
     ======================================== --> 
     <?php
+    print "<h1>Select Database Tables</h1>";
 
 $orderId = "6";
  
@@ -883,7 +956,7 @@ print "<h3>orders</h3>
 
 echo "<p id=\"select_from_orders_response\"></p>";
 
-    print "<h1>Select Database Tables</h1>";
+   
     echo "<h2>Table: Cart</h2>";
 
     $customerid = "1";
@@ -1004,6 +1077,14 @@ echo "<p id=\"select_from_orders_response\"></p>";
 
     echo "<p id=\"search_select_from_bookpreview_response\"></p>";
 
+
+    echo "<h2>Table: Customers</h2>";
+    $id = "4";
+    print "<h3>Via Button with pre-defined values</h3>
+            <p>Existing author id = $id</p>
+            <button onclick=\"select_from_customers($id)\">Submit</button>";
+
+    echo "<p id=\"select_from_customers_response\"></p>";
 
     ?>
 

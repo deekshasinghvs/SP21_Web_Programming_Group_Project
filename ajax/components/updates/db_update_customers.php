@@ -1,10 +1,10 @@
 <?php
-//Inserts a row to the `customers` table in database `bookstore`. Takes in input the row values to be inserted and outputs a JSON with response code and insert id.
+// Updates the details of a customer, through the `customers` table in database `bookstore`. Takes in input the details to be updated and outputs a JSON with response code and update id.
 
 // **REQUIRES**
-// A JSON object named "customers_insert_input_query" must be POSTed to this file with the following key-value pairs:
+// A JSON object named "customers_update_input_query" must be POSTed to this file with the following key-value pairs:
  
-// customers_insert_input_query = 
+// customers_update_input_query = 
 //     {
 //         Key: "id"
 //         Value: the customers's database id - should be able to be converted into type int(13) 
@@ -24,7 +24,7 @@
 //         key: "street"
 //         value: the customers's street- should be able to be converted into type varchar(100)
 //         
-//         key: "addressLine1"
+//         key: "addessLine1"
 //         value: the customer's address line- should be able to be converted to type varchar(100)
 //
 //         key: "addressLine2"
@@ -73,14 +73,16 @@
 //         value: the date of birth of customer- should be able to be converted into type date
 //          }
 
-// **ENSURES**
-// a new row is inserted into the customers table in the database with the passed attributes.
-// A JSON response is outputted, "customers_insert_output_response" which is formed as:
+//     }
 
-// customers_insert_output_response = 
+// **ENSURES**
+// a row is updated in the customers table in the database with the passed attributes.
+// A JSON response is outputted, "customers_update_output_response" which is formed as:
+
+// customers_update_output_response = 
 //     {  
 //         "response_code": <RESPONSE CODE>,
-//         "response": <INSERT ID>
+//         "response": "null"
 //     }
 
 
@@ -90,88 +92,90 @@ include "../../../debug/chromephp-master/ChromePhp.php";
 require "../../../internal/dbconnect.php";
 session_start();
 
-$sql = "INSERT INTO `customers`(`id`, `email`, `firstName`, `lastName`, `postalCode`, `street`, `addessLine1`, `addressLine2`, `city`, `country`, `phone`, `username`, `passwordencrypted`, `isAdmin`, `emailVerified`, `phoneVerified`, `registrationDate`, `lastOnline`, `referralCode`, `referredBy`, `dataStoragePermission`, `dob`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "UPDATE `customers` SET `email`=?,`firstName`=?,`lastName`=?,`postalCode`=?,`street`=?,`addessLine1`=?,`addressLine2`=?,`city`=?,`country`=?,`phone`=?,`username`=?,`passwordencrypted`=?,`isAdmin`=?,`emailVerified`=?,`phoneVerified`=?,`lastOnline`=?, `referralCode`=?,`referredBy`=?,`dataStoragePermission`=?,`dob`=? WHERE id=?";
+
 
 // log to console
 ChromePhp::log($sql);
 
 // decode the JSON POSTed variable
-$insert_input_query_encoded = $_REQUEST["customers_insert_input_query"];
-$insert_input_query = json_decode($insert_input_query_encoded);
+$update_input_query_encoded = $_REQUEST["customers_update_input_query"];
+$update_input_query = json_decode($update_input_query_encoded);
 
 
 // Parse the POST-ed JSON input object into individual attributes
 
-
-$id = number_format($insert_input_query->id);
+$id = number_format($update_input_query->id);
 ChromePhp::log("\nid=$id");
 
-$email = $insert_input_query->email;
+$email = $update_input_query->email;
 ChromePhp::log("\nemail=$email");
 
-$firstName = $insert_input_query->firstName;
+$firstName = $update_input_query->firstName;
 ChromePhp::log("\nfirstName=$firstName");
 
-$lastName = $insert_input_query->lastName;
+$lastName = $update_input_query->lastName;
 ChromePhp::log("\nlastName=$lastName");
 
-$postalCode = number_format($insert_input_query->postalCode);
+$postalCode = number_format($update_input_query->postalCode);
 ChromePhp::log("\npostalCode=$postalCode");
 
-$street = $insert_input_query->street;
+$street = $update_input_query->street;
 ChromePhp::log("\nstreet=$street");
 
-$addessLine1 = $insert_input_query->addessLine1;
+$addessLine1 = $update_input_query->addessLine1;
 ChromePhp::log("\naddressLine1=$addessLine1");
 
-$addressLine2 = $insert_input_query->addressLine2;
+$addressLine2 = $update_input_query->addressLine2;
 ChromePhp::log("\naddressLine2=$addressLine2");
 
-$city = $insert_input_query->city;
+$city = $update_input_query->city;
 ChromePhp::log("\ncity=$city");
 
-$country = $insert_input_query->country;
+$country = $update_input_query->country;
 ChromePhp::log("\ncountry=$country");
 
-$phone = $insert_input_query->phone;
+$phone = $update_input_query->phone;
 ChromePhp::log("\nphone=$phone");
 
-$username = $insert_input_query->username;
+$username = $update_input_query->username;
 ChromePhp::log("\nusername=$username");
 
-$passwordencrypted = $insert_input_query->passwordencrypted;
+$passwordencrypted = $update_input_query->passwordencrypted;
 ChromePhp::log("\npasswordencrypted=$passwordencrypted");
 
-$isAdmin = number_format($insert_input_query->isAdmin);
+$isAdmin = number_format($update_input_query->isAdmin);
 ChromePhp::log("\nisAdmin=$isAdmin");
 
-$emailVerified = number_format($insert_input_query->emailVerified);
+$emailVerified = number_format($update_input_query->emailVerified);
 ChromePhp::log("\nemailVerified=$emailVerified");
 
-$phoneVerified = number_format($insert_input_query->phoneVerified);
+$phoneVerified = number_format($update_input_query->phoneVerified);
 ChromePhp::log("\nphoneVerified=$phoneVerified");
 
-$registrationDate = $insert_input_query->registrationDate;
-ChromePhp::log("\nregistartionDate=$registrationDate");
+//$registrationDate = $_update_input_query->registrationDate;
+//ChromePhp::log("\nregistartionDate=$registrationDate");
 
-$lastOnline = $insert_input_query->lastOnline;
+$lastOnline = $update_input_query->lastOnline;
 ChromePhp::log("\nlastOnline=$lastOnline");
 
-$referralCode = $insert_input_query->referralCode;
+$referralCode = $update_input_query->referralCode;
 ChromePhp::log("\nreferralCode =$referralCode");
 
-$referredBy = $insert_input_query->referredBy;
+$referredBy = $update_input_query->referredBy;
 ChromePhp::log("\nreferredBy =$referredBy");
 
-$dataStoragePermission = number_format($insert_input_query->dataStoragePermission);
+$dataStoragePermission = number_format($update_input_query->dataStoragePermission);
 ChromePhp::log("\ndataStoragePermission =$dataStoragePermission ");
 
-$dob = $insert_input_query->dob;
+$dob = $update_input_query->dob;
 ChromePhp::log("\ndob =$dob");
-
 
 // prepares the SQL statement
 $stmt = $mysqli->prepare($sql);
+
+ChromePhp::log("Query Prepared");
+
 
 // checks for errors
 if(! $stmt) 
@@ -180,16 +184,23 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("isssissssssssiiissssis", $id, $email, $firstName, $lastName, $postalCode, $street, $addessLine1, $addressLine2, $city, $country, $phone, $username, $passwordencrypted, $isAdmin, $emailVerified, $phoneVerified, $registrationDate, $lastOnline, $referralCode, $referredBy, $dataStoragePermission, $dob);
+
+$stmt->bind_param("sssissssssssiiisssisi", $email, $firstName, $lastName, $postalCode, $street, $addessLine1, $addressLine2, $city, $country, $phone, $username, $passwordencrypted, $isAdmin, $emailVerified, $phoneVerified, $lastOnline, $referralCode, $referredBy, $dataStoragePermission, $dob, $id);
+
+ChromePhp::log("Parameters Bound");
 
 // executes statement
 $stmt->execute();
 
-// get the id of the insert
-$insert_id = $mysqli->insert_id;
+
+ChromePhp::log("SQL Executed");
+
+// get the id of the update
+$updated_rows = "null";
 
 // REMOVE - TO DO 🔲
-ChromePhp::log("Added to customers: customers_insert_id=$insert_id");
+ChromePhp::log("Updated customer: customers_id=$updated_rows");
+
 $response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
@@ -197,11 +208,11 @@ if ($stmt->error == "")
     $response->response_code = "success";
 }
 
-$response->response = "$insert_id";
-$customers_insert_output_response = json_encode($response);
+$response->response = "$updated_rows";
+$customers_update_output_response = json_encode($response);
 
 // REMOVE - TO DO 🔲
-ChromePhp::log("\nComponent Output Response=$customers_insert_output_response");
+ChromePhp::log("\nComponent Output Response=$customers_update_output_response");
 
-print $customers_insert_output_response;
+print $customers_update_output_response;
 ?>

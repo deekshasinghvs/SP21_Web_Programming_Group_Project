@@ -144,29 +144,6 @@ function display_add_publisher_response(x,y,z)
 	$("#add_to_publisher_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
-// function add_bookgenre(data)  
-// {
-// 	var data_encoded = {'bookgenre_insert_input_query':  JSON.stringify(data)};
-
-// 	$("#add_to_bookgenre_response").append(data_encoded);
-	
-// 	$.ajax({
-// 			type: "POST",
-// 			url: "../ajax/components/inserts/db_insert_bookgenre.php",
-// 			data: data_encoded,
-// 			success: display_add_bookgenre_response
-// 		   });
-// }
-
-// // success function - will contain HTML formatting - can be in a separate file during non-testing stages
-// function display_add_bookgenre_response(x,y,z) 
-// {
-// 	var o = JSON.parse(x);
-
-// 	$("#add_to_bookgenre_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
-// }
-
-
 
 function add_books(data)  
 {
@@ -234,6 +211,7 @@ function display_add_bookauthors_response(x,y,z)
 	$("#add_to_bookauthors_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
+
 function add_customers(data)  
 {
 	var data_encoded = {'customers_insert_input_query':  JSON.stringify(data)};
@@ -255,7 +233,6 @@ function display_add_customers_response(x,y,z)
 
 	$("#add_to_customers_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
-
 
 
 // ======================================================
@@ -282,8 +259,6 @@ function display_update_orderdetails_response(x,y,z)
 
 	$("#update_in_orderdetails_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
 }
-
-
 
 
 function update_cart(data) 
@@ -399,9 +374,6 @@ function display_update_genre_response(x,y,z)
 }
 
 
-
-
-
 function update_books(data) 
 {
 	var data_encoded = {'books_update_input_query':  JSON.stringify(data)};
@@ -444,6 +416,28 @@ function display_update_author_response(x,y,z)
 	var o = JSON.parse(x);
 
 	$("#update_in_author_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
+}
+
+function update_customers(data) 
+{
+	var data_encoded = {'customers_update_input_query':  JSON.stringify(data)};
+
+	$("#update_to_customers_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/updates/db_update_customers.php",
+			data: data_encoded,
+			success: display_update_customers_response
+		   });
+}
+
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_update_customers_response(x,y,z) 
+{
+	var o = JSON.parse(x);
+
+	$("#update_in_customers_response").append("<br>response code: " + o.response_code + "<br>update id: " + o.response);
 }
 
 
@@ -542,7 +536,6 @@ function display_show_publisher_response(x,y,z)
 }
 
 
-
 function show_genre(data) 
 {
 	var data_encoded = {'genre_select_input_query':  JSON.stringify(data)};
@@ -603,6 +596,7 @@ function display_show_books_response(x,y,z)
 
 	}
 }
+
 function show_bookpreview(data) 
 {
 	var data_encoded = {'bookpreview_select_input_query':  JSON.stringify(data)};
@@ -703,8 +697,6 @@ function display_search_bookpreview_response(x,y,z)
 		$('#custtablebookpreview TBODY').append(t);
 	}
 }
-
-
 
 
 function show_author(data) 
@@ -823,3 +815,33 @@ function display_show_orders_response(x,y,z)
 
 	}
 }
+
+function show_customers(data) 
+{
+	var data_encoded = {'customers_select_input_query':  JSON.stringify(data)};
+
+	// $("#select_from_customers_response").append(data_encoded);
+	
+	$.ajax({
+			type: "POST",
+			url: "../ajax/components/selects/db_select_customers.php",
+			data: data_encoded,
+			success: display_show_customers_response
+		   });
+}
+// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+function display_show_customers_response(x,y,z) 
+{
+	var o = JSON.parse(JSON.parse(x).response);
+
+	$("#select_from_customers_response").html('<table class="table" id="custtablecustomers"><thead><tr><th>id</th><th>email</th><th>firstName</th><th>lastName</th><th>postalCode</th><th>street</th><th>addessLine1</th><th>addressLine2</th><th>city</th><th>country</th><th>phone</th><th>username</th><th>passwordencrypted</th><th>isAdmin</th><th>emailVerified</th><th>phoneVerified</th><th>registrationDate</th><th>lastOnline</th><th>referralCode</th><th>referredBy</th><th>dataStoragePermission</th><th>dob</th></tr></thead><tbody></tbody></table>');
+	
+	for(var i = 0; i < o.length; i++) 
+	{
+		var t = '<tr><td>'+ o[i].id+'</td><td>'+ o[i].email+'</td><td>'+o[i].firstName+'</td><td>'+o[i].lastName+'</td><td>'+o[i].postalCode+'</td><td>'+o[i].street+'</td><td>'+o[i].addessLine1+'</td><td>'+o[i].addressLine2+'</td><td>'+o[i].city+'</td><td>'+o[i].country+'</td><td>'+o[i].phone+'</td><td>'+o[i].username+'</td><td>'+o[i].passwordencrypted+'</td><td>'+o[i].isAdmin+'</td><td>'+o[i].emailVerified+'</td><td>'+o[i].phoneVerified+'</td><td>'+o[i].registrationDate+'</td><td>'+o[i].lastOnline+'</td><td>'+o[i].referralCode+'</td><td>'+o[i].referredBy+'</td><td>'+o[i].dataStoragePermission+'</td><td>'+o[i].dob+'</td></tr>';
+
+		$('#custtablecustomers TBODY').append(t);
+
+	}
+}
+
