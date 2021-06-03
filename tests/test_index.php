@@ -194,7 +194,7 @@ include "../debug/chromephp-master/ChromePhp.php";
         var dateUpdated_id = "dateUpdated_insert";
         var dateUpdated = $("#"+ dateUpdated_id).val();        
                                 
-        var data = {"customerID": parseInt(customerID),
+        var data = {"customerId": parseInt(customerID),
                     "bookId": bookId, 
                     "rating": rating,
                     "dateUpdated": dateUpdated
