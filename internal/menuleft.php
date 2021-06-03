@@ -8,8 +8,8 @@ if (! ($res = $mysqli->query($sql))) {
  			$mysqli->errno . ") " . $mysqli->error;
 } else {
 	while ($row = $res->fetch_assoc()) {
-		print "<li class='nav-item'><a class='nav-link' href='index.php?p=catinfo&catid=$row[ID]'>".
-				"$row[Name]</a></li>";
+		print "<li class='nav-item'><a class='nav-link' href='index.php?p=catinfo&catid=$row[id]'>".
+				"$row[name]</a></li>";
 	}
 }
 

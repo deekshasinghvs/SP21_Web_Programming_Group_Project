@@ -79,22 +79,22 @@ $price = number_format($insert_input_query->price);
 ChromePhp::log("\nprice=$price");
 
 $categoryId = number_format($insert_input_query->categoryId);
-chromePhp::log("\ncategoryId=$categoryId");
+ChromePhp::log("\ncategoryId=$categoryId");
 
 $previewLink = $insert_input_query->previewLink;
-chromePhp::log("\npreviewLink=$previewLink");
+ChromePhp::log("\npreviewLink=$previewLink");
 
-$publicationDate = number_format($insert_input_query->publicationDate);
-chromePhp::log("\npublicationDate=$publicationDate");
+$publicationDate = $insert_input_query->publicationDate;
+ChromePhp::log("\npublicationDate=$publicationDate");
 
 $edition = number_format($insert_input_query->edition);
-chromePhp::log("\nedition=$edition");
+ChromePhp::log("\nedition=$edition");
 
 $publisherId = number_format($insert_input_query->publisherId);
-chromePhp::log("\npublisherId=$publisherId");
+ChromePhp::log("\npublisherId=$publisherId");
 
 $displayImage = $insert_input_query->displayImage;
-chromePhp::log("\ndisplayImage=$displayImage");
+ChromePhp::log("\ndisplayImage=$displayImage");
 
 
 // prepares the SQL statement
@@ -117,7 +117,7 @@ $insert_id = $mysqli->insert_id;
 
 // REMOVE - TO DO 🔲
 ChromePhp::log("Added to books: book_insert_id=$insert_id");
-
+$response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
 {

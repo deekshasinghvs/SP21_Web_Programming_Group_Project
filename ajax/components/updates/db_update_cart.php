@@ -23,7 +23,7 @@
 // cart_update_output_response = 
 //     {  
 //         "response_code": <RESPONSE CODE>,
-//         "response": <UPDATE ID>
+//         "response": "null"
 //     }
 
 
@@ -78,18 +78,19 @@ $stmt->execute();
 ChromePhp::log("SQL Executed");
 
 // get the id of the update
-$update_id = $mysqli->update_id;
+$updated_rows = "null";
 
 // REMOVE - TO DO 🔲
-ChromePhp::log("Updated cart: cart_id=$update_id");
+ChromePhp::log("Updated cart: cart_id=$updated_rows");
 
+$response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
 {
     $response->response_code = "success";
 }
 
-$response->response = "$update_id";
+$response->response = "$updated_rows";
 $cart_update_output_response = json_encode($response);
 
 // REMOVE - TO DO 🔲

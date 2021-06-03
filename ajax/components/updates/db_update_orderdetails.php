@@ -7,14 +7,13 @@
 // orderdetails_update_input_query = 
 //     {
 //         Key: "orderId"
-//         Value: the customer's order id - should be able to be converted into type int(11) 
-
-//         Key: "quantity"
-//         Value: the quantity of books - should be able to be converted into type int(4)
+//         Value: the customer's order id - should be able to be converted into type int 
 
 //         Key: "bookId" 
 //         Value: the book's database id (i.e, ISBN) - should be able to be converted into type varchar(13)
 
+//         Key: "quantity"
+//         Value: the quantity of books the customer wants to add to their orderdetails - should be able to be converted into type int
 //     }
 
 // **ENSURES**
@@ -24,7 +23,7 @@
 // orderdetails_update_output_response = 
 //     {  
 //         "response_code": <RESPONSE CODE>,
-//         "response": <UPDATE ID>
+//         "response": "null"
 //     }
 
 
@@ -48,12 +47,11 @@ $update_input_query = json_decode($update_input_query_encoded);
 $orderId = number_format($update_input_query->orderId);
 ChromePhp::log("\norderId=$orderId");
 
-$quantity = number_format($update_input_query->quantity);
-ChromePhp::log("\nquantity=$quantity");
-
 $bookId = $update_input_query->bookId;
-ChromePhp::log("\nbookId=$bookId");
+$quantity = number_format($update_input_query->quantity);
 
+ChromePhp::log("\nbookid=$bookId");
+ChromePhp::log("\nquantity=$quantity");
 
 
 // prepares the SQL statement
@@ -69,7 +67,7 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("iis", $orderId, $quantity, $bookId);
+$stmt->bind_param("iis",$quantity, $orderId, $bookId);
 
 ChromePhp::log("Parameters Bound");
 
@@ -80,10 +78,11 @@ $stmt->execute();
 ChromePhp::log("SQL Executed");
 
 // get the id of the update
-$update_id = $mysqli->update_id;
+$updated_rows = "null";
 
 // REMOVE - TO DO 🔲
-ChromePhp::log("Updated orderdetails: orderdetails_id=$update_id");
+ChromePhp::log("Updated orderdetails: orderdetails_id=$updated_rows");
+
 $response = json_decode("{}");
 $response->response_code = $stmt->error;
 if ($stmt->error == "")
@@ -91,7 +90,7 @@ if ($stmt->error == "")
     $response->response_code = "success";
 }
 
-$response->response = "$update_id";
+$response->response = "$updated_rows";
 $orderdetails_update_output_response = json_encode($response);
 
 // REMOVE - TO DO 🔲
