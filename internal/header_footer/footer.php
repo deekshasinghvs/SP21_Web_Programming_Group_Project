@@ -15,6 +15,7 @@
 </head>
 
 <body style="border-style: none;border-color: #0a1045;background: var(--bs-light);">
+    <div class="container border rounded-pill shadow-sm">
         <footer class="footer-dark" style="color: #ffffff;background: #0a1045;">
             <div class="container" style="text-align: center;">
                 <div class="row text-start">
@@ -43,6 +44,7 @@
                 <p class="copyright">Bookstore © 2021</p>
             </div>
         </footer>
+</div>
     <script src="headerfooter_assests/bootstrap/js/bootstrap.min.js"></script>
 </body>
 

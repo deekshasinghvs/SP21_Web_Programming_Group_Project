@@ -61,13 +61,15 @@ if( ! isset($_SESSION['is_admin'])) {
     <div id="header"></div>
     <div id="section">
     <?php
-if( ! isset($_REQUEST['p'])) {
+if( ! isset($_REQUEST['p'])) 
+{
 	$_REQUEST['p']='home';
   require "internal/home/index.html";
 }
 $p = $_REQUEST['p'];
 // list of the permited pages
-$pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
+// $pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
+$pages = array('blog','home','login','logout','myinfo','contact','books','cart','catinfo','add_cart','empty_cart','buy_cart');
 
 $ok=false;
 foreach($pages as $pp) {
