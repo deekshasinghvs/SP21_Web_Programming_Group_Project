@@ -33,7 +33,7 @@ if( ! isset($_SESSION['is_admin'])) {
     $(function(){
       // $("#section").load("internal/home/index.html");  
       $("#footer").load("internal/footer.php"); 
-      $("#section").load("internal/" + $("#section_name").val() + ".php"); 
+      // $("#section").load("internal/" + $("#section_name").val() + ".php"); 
     });
 
     function load_section(page)
@@ -68,7 +68,7 @@ if( ! isset($_SESSION['is_admin'])) {
   <body> 
     <?php
       $_SESSION['username'] = "john";
-      $_SESSION['is_admin'] = 0;
+      $_SESSION['is_admin'] = 1;
       
       $header_type = "";
       if($_SESSION['is_admin'] == 1)
@@ -112,7 +112,7 @@ if( ! isset($_SESSION['is_admin'])) {
       if(isset($_REQUEST['query']) && $_REQUEST['p']=='search') 
       {
         $_REQUEST['query'] = "'" . $_REQUEST['query'] . "'";
-        require "internal/search.php";
+        require_once "internal/search.php";
       }
 
 

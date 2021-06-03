@@ -1,6 +1,3 @@
-
-
-
 function search_select_from_bookpreview(query, orderBy, limit, offset)
 {
     // var query = $("#search_query").val();

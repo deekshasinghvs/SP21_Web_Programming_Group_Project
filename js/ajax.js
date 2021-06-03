@@ -1,4 +1,5 @@
 var xmlhttp;
+
 // function show_orders() {
 // 	xmlhttp = new XMLHttpRequest();
 // 	xmlhttp.onreadystatechange = show_orders_response;
@@ -95,37 +96,117 @@ function search_bookpreview(data)
 		   });
 }
 
-// success function - will contain HTML formatting - can be in a separate file during non-testing stages
+// // success function - will contain HTML formatting - can be in a separate file during non-testing stages
+// function display_search_bookpreview_response(x,y,z) 
+// {
+// 	var o = JSON.parse(JSON.parse(x).response);
+
+// 	var json = o[0];
+// 	var keys = [];
+
+// 	html_table = "<table class=\"table\" id=\"custtablebookpreview\"><thead><tr>";
+	
+// 	keys = Object.keys(json);
+	
+// 	for(k in keys) 
+// 	{
+// 		// keys.append(k.toString());
+// 		html_table += ("<th>" + keys[k].toString() + "</th>");
+// 	}
+// 	html_table += "</tr></thead><tbody></tbody></table>";
+
+// 	$("#response").html(html_table);
+
+// 	for(var i = 0; i < o.length; i++) 
+// 	{
+// 		var t = "<tr>";
+
+// 		for (k in keys)
+// 		{
+// 			t += ('<td>'+ (o[i])[keys[k]] +'</td><td>');
+// 		}
+// 		t += "</tr>"
+
+// 		$('#custtablebookpreview TBODY').append(t);
+// 	}
+// }
 function display_search_bookpreview_response(x,y,z) 
 {
-	var o = JSON.parse(JSON.parse(x).response);
+            var o = JSON.parse(JSON.parse(x).response);
+            
+            var response_length = o.length;
 
-	var json = o[0];
-	var keys = [];
+			// console.log(o[1].displayImage);
 
-	html_table = "<table class=\"table\" id=\"custtablebookpreview\"><thead><tr>";
-	
-	keys = Object.keys(json);
-	
-	for(k in keys) 
-	{
-		// keys.append(k.toString());
-		html_table += ("<th>" + keys[k].toString() + "</th>");
-	}
-	html_table += "</tr></thead><tbody></tbody></table>";
+            // var json = o[0];
+            // var keys = [];
+            
+            // html_table = "<table class=\"table\" id=\"custtablebookpreview\"><thead><tr>";
+            
+            // keys = Object.keys(json);
+            
+            // for(k in keys) 
+            // {
+            //     // keys.append(k.toString());
+            //     html_table += ("<th>" + keys[k].toString() + "</th>");
+            // }
+            // html_table += "</tr></thead><tbody></tbody></table>";
 
-	$("#response").html(html_table);
+            // $("#response").html(html_table);
 
-	for(var i = 0; i < o.length; i++) 
-	{
-		var t = "<tr>";
+            // for(var i = 0; i < o.length; i++) 
+            // {
+            //     var t = "<tr>";
 
-		for (k in keys)
-		{
-			t += ('<td>'+ (o[i])[keys[k]] +'</td><td>');
-		}
-		t += "</tr>"
+            //     for (k in keys)
+            //     {
+            //         t += ('<td>'+ (o[i])[keys[k]] +'</td><td>');
+            //     }
+            //     t += "</tr>"
 
-		$('#custtablebookpreview TBODY').append(t);
-	}
+            //     $('#custtablebookpreview TBODY').append(t);
+            // }
+
+            var num_books_displayed = 0;
+			// $("#books_result").append("<div class=\"row\"></div>");
+			$("#books_result").html("");
+			t = "<div class=\"row\"></div>";
+
+            while(num_books_displayed < response_length)
+            {
+    	        t += "<div class=\"row\" style=\"background: #ffffff;opacity: 1;\">";
+				var inner_ctr = 0;
+            	while(inner_ctr < 3)
+                {
+                    t += "<div class=\"col\" style=\"text-align: center;\"><img class=\"img-fluid\" src=\"" + 			
+					o[num_books_displayed + inner_ctr].displayImage + "\" height=\"100px\" style=\"width: 150px;height: 199px;text-align: center;\"></div>";
+
+                    // $("#books_result").append(t);
+                    
+					// num_books_displayed = num_books_displayed + 1;
+					inner_ctr = inner_ctr + 1;
+                }
+				// $("#books_result").append("</div>");
+				// $("#books_result").append("<div class=\"row\" style=\"background: rgb(255,255,255);opacity: 1;transform: perspective(0px);\">");
+				t += "</div>";
+				$("#books_result").append(t);
+
+				t = "<div class=\"row\" style=\"background: rgb(255,255,255);opacity: 1;transform: perspective(0px);\">";
+
+				inner_ctr = 0;
+            	while(inner_ctr < 3)
+                {
+				    t += "<div class=\"col\">                    <h3 class=\"my-3\" style=\"text-align: center;font-size: 20px;\"></h3><h3 class=\"my-3\" style=\"text-align: center;font-size: 20px;\"><a href=\"#\" style=\"color: rgb(0,0,0);\">" +o[num_books_displayed  + inner_ctr].title + "</a></h3>                    <h3 class=\"my-3\" style=\"text-align: center;font-size: 15px;\"><a href=\"#\" style=\"color: rgb(0,0,0)\">"  + o[num_books_displayed  + inner_ctr].authorName + "</a></h3><h3 class=\"my-3\" style=\"text-align: center;font-size: 15px;color: rgb(66,76,86);\"><a href=\"#\" style=\"color: rgb(0,0,0);\">" + o[num_books_displayed  + inner_ctr].price + "$</a></h3><h6 style=\"text-align: center;\">&nbsp;<button class=\"btn btn-secondary btn-sm\" style=\"background: #FF0800;border-color: rgba(255,255,255,0);text-align: center;\">Buy</button>&nbsp; &nbsp;&nbsp;<button class=\"btn btn-secondary btn-sm\" style=\"background: #FF0800;border-color: rgba(255,255,255,0);\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\">                            <path d=\"M2 5H14V7H2V5Z\" fill=\"currentColor\"></path>                                <path d=\"M2 9H14V11H2V9Z\" fill=\"currentColor\"></path>                                <path d=\"M10 13H2V15H10V13Z\" fill=\"currentColor\"></path><path d=\"M16 9H18V13H22V15H18V19H16V15H12V13H16V9Z\" fill=\"currentColor\"></path></svg></button></h6></div>";
+
+
+                    // $("#books_result").append(t);
+					inner_ctr = inner_ctr + 1;
+					num_books_displayed = num_books_displayed + 1;
+                }
+				// $("#books_result").append("</div>");
+				// $("#books_result").append("<div class=\"row\"></div>");
+				t += "</div>";
+				t += "<div class=\"row\"></div>";
+				$("#books_result").append(t);
+            }
 }

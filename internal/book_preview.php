@@ -1,0 +1,1 @@
+<?php require "internal/book_preview/index.html"; ?>

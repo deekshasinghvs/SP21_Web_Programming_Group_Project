@@ -19,4 +19,8 @@ if(isset($_REQUEST["offset"]))
 echo "<script>search_select_from_bookpreview($query, $orderBy, $limit, $offset);</script>";
 // unset($_REQUEST["search"]);
 ?>
-<div id="response"></div>
+<div id="response">
+<?php
+require_once "internal/books.php";
+?>
+</div>
