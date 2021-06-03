@@ -29,9 +29,8 @@ if( ! isset($_SESSION['is_admin'])) {
 
     <script> 
     $(function(){
-      // $("#section").load("internal/home/index.html"); 
-      $("#header").load("internal/header_footer/header.php"); 
-      $("#footer").load("internal/header_footer/footer.php"); 
+      // $("#section").load("internal/home/index.html");  
+      $("#footer").load("internal/footer.php"); 
       $("#section").load("internal/" + $("#section_name").val() + ".php"); 
     });
 
@@ -40,6 +39,13 @@ if( ! isset($_SESSION['is_admin'])) {
       $("#section").load("internal/" + page + ".php");       
 
     }
+
+    function load_header()
+    {
+      var header_type = $(".header").attr('id');
+      $(".header").load("internal/" + header_type + ".php");
+    }
+
     </script> 
 
     <!-- Script to add live chat option -->
@@ -58,30 +64,61 @@ if( ! isset($_SESSION['is_admin'])) {
   </head> 
 
   <body> 
-    <div id="header"></div>
-    <div id="section">
     <?php
-if( ! isset($_REQUEST['p'])) {
-	$_REQUEST['p']='home';
-  require "internal/home/index.html";
-}
-$p = $_REQUEST['p'];
-// list of the permited pages
-$pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
+      $_SESSION['username'] = "?";
+      $_SESSION['is_admin'] = 1;
+      
+      $header_type = "";
+      if($_SESSION['is_admin'] == 1)
+      { 
+        // is the logged in user an admin?
+        $header_type = "admin_header";
+      }
+      else
+      {
+        // is the session for a logged in user?
+        if($_SESSION['username']!='?')
+        {
+          $header_type = "user_header";
+        }
+        else
+        {
+          // show header with login and registration options
+          $header_type = "guest_header";
+        }
+      }
+      echo "<div class=\"header\" id=\"" . $header_type . "\">header</div>";
+      echo "<script>load_header()</script>";
+      
+    ?>
 
-$ok=false;
-foreach($pages as $pp) {
-	if($pp==$p) {
-		require "internal/$p.php";
-		$ok=true;
-	}
-}
-if(! $ok) {
-	print "Page does not exists";
-}
-?>
+    <div id="section">
+      <?php
+      if( ! isset($_REQUEST['p'])) 
+      {
+        $_REQUEST['p']='home';
+        require "internal/home/index.html";
+      }
+      $p = $_REQUEST['p'];
+      // list of the permited pages
 
+      // $pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
+
+      $pages = array('blog','home','login','logout','myinfo','contact','books','cart','catinfo','add_cart','empty_cart','buy_cart');
+
+      $ok=false;
+      foreach($pages as $pp) {
+        if($pp==$p) {
+          require "internal/$p.php";
+          $ok=true;
+        }
+      }
+      if(! $ok) {
+        print "Page does not exists";
+      }
+    ?>
     </div>
+
     <div id="footer"></div>
 
 
