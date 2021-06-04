@@ -10,7 +10,7 @@
 //         Value: the review's database id - should be able to be converted into type int(11)
 
 //         Key: "rating"
-//         Value: the books rating id - should be able to be converted into type int(11)
+//         Value: the books rating id - should be able to be converted into type float
 
 //         Key: "bookid" 
 //         Value: the book review - should be able to be converted into type varchar(500)
@@ -40,7 +40,7 @@ include "../../../debug/chromephp-master/ChromePhp.php";
 require "../../../internal/dbconnect.php";
 session_start();
 
-$sql = "INSERT INTO `ratings`(`rating`, `bookid`, `customerid`, `dateUpdated`) VALUES (?,?,?,?)";
+$sql = "INSERT INTO `ratings`(`id`, `rating`, `bookId`, `customerId`, `dateUpdated`) VALUES (?,?,?,?,?)";
 
 // log to console
 ChromePhp::log($sql);
@@ -49,16 +49,17 @@ ChromePhp::log($sql);
 $insert_input_query_encoded = $_REQUEST["ratings_insert_input_query"];
 $insert_input_query = json_decode($insert_input_query_encoded);
 
-
 // Parse the POST-ed JSON input object into individual attributes
+$id = number_format($insert_input_query->id);
+ChromePhp::log("\nid=$id");
 
 $rating = number_format($insert_input_query->rating);
 ChromePhp::log("\nrating=$rating");
 
 $bookId = $insert_input_query->bookId;
-ChromePhp::log("\ncustomerId=$bookId");
+ChromePhp::log("\nbookId=$bookId");
 
-$customerId = $insert_input_query->customerId;
+$customerId = number_format($insert_input_query->customerId);
 ChromePhp::log("\ncustomerId=$customerId");
 
 $dateUpdated = $insert_input_query->dateUpdated;
@@ -74,7 +75,7 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("isis", $rating, $bookId, $customerId, $dateUpdated);
+$stmt->bind_param("idsis", $id, $rating, $bookId, $customerId, $dateUpdated);
 
 // executes statement
 $stmt->execute();

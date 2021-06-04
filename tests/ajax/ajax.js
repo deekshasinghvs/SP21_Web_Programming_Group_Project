@@ -200,7 +200,7 @@ function display_add_ratings_response(x,y,z)
 {
 	var o = JSON.parse(x);
 
-	$("#add_to_ratingsr_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
+	$("#add_to_ratings_response").append("<br>response code: " + o.response_code + "<br>insert id: " + o.response);
 }
 
 function add_reviews(data)  
@@ -651,56 +651,5 @@ function display_show_reviews_response(x,y,z)
 
 		$('#custtablereviews TBODY').append(t);
 
-	}
-}
-
-
-function search_bookpreview(data) 
-{
-	var data_encoded = {'bookpreview_select_input_query':  JSON.stringify(data)};
-
-	$("#search_select_from_bookpreview_response").append(data_encoded);
-	
-	$.ajax({
-			type: "POST",
-			url: "../ajax/specialized_components/db_select_bookpreview_by_search.php",
-			data: data_encoded,
-			success: display_search_bookpreview_response
-		   });
-}
-// success function - will contain HTML formatting - can be in a separate file during non-testing stages
-function display_search_bookpreview_response(x,y,z) 
-{
-	var o = JSON.parse(JSON.parse(x).response);
-
-	// $("#select_from_bookpreview_response").append(o[0].isbn.toString());
-	
-	var json = o[0];
-	var keys = [];
-
-	html_table = "<table class=\"table\" id=\"custtablebookpreview\"><thead><tr>";
-	
-	keys = Object.keys(json);
-	
-	for(k in keys) 
-	{
-		// keys.append(k.toString());
-		html_table += ("<th>" + keys[k].toString() + "</th>");
-	}
-	html_table += "</tr></thead><tbody></tbody></table>";
-
-	$("#search_select_from_bookpreview_response").append(html_table);
-
-	for(var i = 0; i < o.length; i++) 
-	{
-		var t = "<tr>";
-
-		for (k in keys)
-		{
-			t += ('<td>'+ (o[i])[keys[k]] +'</td><td>');
-		}
-		t += "</tr>"
-
-		$('#custtablebookpreview TBODY').append(t);
 	}
 }
