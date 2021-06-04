@@ -90,7 +90,7 @@ include "../../../debug/chromephp-master/ChromePhp.php";
 require "../../../internal/dbconnect.php";
 session_start();
 
-$sql = "INSERT INTO `customers`(`id`, `email`, `firstName`, `lastName`, `postalCode`, `street`, `addessLine1`, `addressLine2`, `city`, `country`, `phone`, `username`, `passwordencrypted`, `isAdmin`, `emailVerified`, `phoneVerified`, `registrationDate`, `lastOnline`, `referralCode`, `referredBy`, `dataStoragePermission`, `dob`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO `customers`(`email`, `firstName`, `lastName`, `postalCode`, `street`, `addessLine1`, `addressLine2`, `city`, `country`, `phone`, `username`, `passwordencrypted`, `isAdmin`, `emailVerified`, `phoneVerified`, `registrationDate`, `lastOnline`, `referralCode`, `referredBy`, `dataStoragePermission`, `dob`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 // log to console
 ChromePhp::log($sql);
@@ -103,8 +103,8 @@ $insert_input_query = json_decode($insert_input_query_encoded);
 // Parse the POST-ed JSON input object into individual attributes
 
 
-$id = number_format($insert_input_query->id);
-ChromePhp::log("\nid=$id");
+// $id = number_format($insert_input_query->id);
+// ChromePhp::log("\nid=$id");
 
 $email = $insert_input_query->email;
 ChromePhp::log("\nemail=$email");
@@ -180,7 +180,7 @@ if(! $stmt)
 }
 
 // binds parameters to their respective datatypes in the database
-$stmt->bind_param("isssissssssssiiissssis", $id, $email, $firstName, $lastName, $postalCode, $street, $addessLine1, $addressLine2, $city, $country, $phone, $username, $passwordencrypted, $isAdmin, $emailVerified, $phoneVerified, $registrationDate, $lastOnline, $referralCode, $referredBy, $dataStoragePermission, $dob);
+$stmt->bind_param("sssissssssssiiissssis", $email, $firstName, $lastName, $postalCode, $street, $addessLine1, $addressLine2, $city, $country, $phone, $username, $passwordencrypted, $isAdmin, $emailVerified, $phoneVerified, $registrationDate, $lastOnline, $referralCode, $referredBy, $dataStoragePermission, $dob);
 
 // executes statement
 $stmt->execute();

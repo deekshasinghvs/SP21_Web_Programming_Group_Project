@@ -108,7 +108,7 @@ if( ! isset($_SESSION['is_admin'])) {
 
       // $pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
 
-      $pages = array('blog','home','login','logout','myinfo','contact','cart','catinfo','add_cart','empty_cart','buy_cart', 'search', 'editorspicks');
+      $pages = array('blog','home','login','logout','myinfo','contact','cart','catinfo','add_cart','empty_cart','buy_cart', 'search', 'editorspicks', 'registration');
 
 
       if(isset($_REQUEST['query']) && $_REQUEST['p']=='search') 
@@ -136,6 +136,34 @@ if( ! isset($_SESSION['is_admin'])) {
         $_REQUEST['isbn'] = "'" . $_REQUEST['isbn'] . "'";
 
         require "internal/book_preview.php";
+        $ok = true;
+      }
+      if($_REQUEST['p']=='register') 
+      {
+        $_REQUEST["firstName_insert_cust"] = "'" + $_REQUEST["firstName_insert_cust"] + "'";
+        $_REQUEST["lastName_insert"] =  "'" + $_REQUEST["lastName_insert"] + "'";
+        $_REQUEST["email_insert"] = "'" + $_REQUEST["email_insert"] + "'";
+        
+        if(isset($_REQUEST["dob_insert"])) 
+        { 
+          $_REQUEST["dob_insert"] = "'" + $_REQUEST["dob_insert"]  + "'";
+        }
+        else
+        {
+          $_REQUEST["dob_insert"] =  "''";
+        }
+        $_REQUEST["passwordencrypted_insert"] =   "'" +  $_REQUEST["passwordencrypted_insert"]  + "'";
+        if(isset($_REQUEST["phone_insert"]))
+        {
+          $_REQUEST["phone_insert"]  = "'" + $_REQUEST["phone_insert"]  + "'";
+        }
+        else
+        {
+          $_REQUEST["phone_insert"]  = "''";
+
+        }
+
+        require_once "internal/register.php";
         $ok = true;
       }
 

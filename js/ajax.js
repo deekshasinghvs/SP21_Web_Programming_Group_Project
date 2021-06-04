@@ -253,3 +253,23 @@ function display_select_bookpreview_response(x,y,z)
 
 
 
+// function add_customers(data)  
+// {
+// 	var data_encoded = {'customers_insert_input_query':  JSON.stringify(data)};
+
+// 	// $("#add_to_customers_response").append(data_encoded);
+	
+// 	$.ajax({
+// 			type: "POST",
+// 			url: "ajax/components/inserts/db_insert_customers.php",
+// 			data: data_encoded,
+// 			success: add_customer_success,
+// 		   });
+// }
+// function add_customer_success(x,y,z)
+// {
+//     $("#response").append("internal/registration_confirmation.php");
+//     $_SESSION['username'] = (JSON.parse(x).response);
+//     $_SESSION['is_admin'] = 0;
+//     console.log("userid: " + $_SESSION['username']);
+// }
