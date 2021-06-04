@@ -1,3 +1,1 @@
-<p>
-Contact us page !
-</p>
+<?php include "internal/contact_us/index.html"; ?>

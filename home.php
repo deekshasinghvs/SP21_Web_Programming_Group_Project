@@ -108,7 +108,7 @@ if( ! isset($_SESSION['is_admin'])) {
 
       // $pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
 
-      $pages = array('blog','home','login','logout','myinfo','contact','cart','catinfo','add_cart','empty_cart','buy_cart', 'search');
+      $pages = array('blog','home','login','logout','myinfo','contact','cart','catinfo','add_cart','empty_cart','buy_cart', 'search', 'editorspicks');
 
 
       if(isset($_REQUEST['query']) && $_REQUEST['p']=='search') 
