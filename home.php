@@ -67,8 +67,8 @@ if( ! isset($_SESSION['is_admin'])) {
 
   <body> 
     <?php
-      $_SESSION['username'] = "john";
-      $_SESSION['is_admin'] = 1;
+      $_SESSION['username'] = "?";
+      $_SESSION['is_admin'] = 0;
       
       $header_type = "";
       if($_SESSION['is_admin'] == 1)
