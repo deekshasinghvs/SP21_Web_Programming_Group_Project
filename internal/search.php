@@ -27,4 +27,4 @@ echo "<script>search_select_from_bookpreview($query, $orderBy, $limit, $offset);
 <?php
 require_once "internal/books.php";
 ?>
-</div>
+</div> 

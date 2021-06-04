@@ -130,7 +130,15 @@ if( ! isset($_SESSION['is_admin'])) {
         require "internal/search.php";
         $ok=true;
       }
-      
+      if(isset($_REQUEST['isbn']) && $_REQUEST['p']=='book_preview') 
+      {
+        
+        $_REQUEST['isbn'] = "'" . $_REQUEST['isbn'] . "'";
+
+        require "internal/book_preview.php";
+        $ok = true;
+      }
+
 
       if(! $ok) {
         print "404 Page does not exist";

@@ -196,7 +196,7 @@ function display_search_bookpreview_response(x,y,z)
 				inner_ctr = 0;
             	while(inner_ctr < 3)
                 {
-				    t += "<div class=\"col\">                    <h3 class=\"my-3\" style=\"text-align: center;font-size: 20px;\"></h3><h3 class=\"my-3\" style=\"text-align: center;font-size: 20px;\"><a href=\"#\" style=\"color: rgb(0,0,0);\">" +o[num_books_displayed  + inner_ctr].title + "</a></h3>                    <h3 class=\"my-3\" style=\"text-align: center;font-size: 15px;\"><a href=\"#\" style=\"color: rgb(0,0,0)\">"  + o[num_books_displayed  + inner_ctr].authorName + "</a></h3><h3 class=\"my-3\" style=\"text-align: center;font-size: 15px;color: rgb(66,76,86);\"><a href=\"#\" style=\"color: rgb(0,0,0);\">" + o[num_books_displayed  + inner_ctr].price + "$</a></h3><h6 style=\"text-align: center;\">&nbsp;<button class=\"btn btn-secondary btn-sm\" style=\"background: #FF0800;border-color: rgba(255,255,255,0);text-align: center;\">Buy</button>&nbsp; &nbsp;&nbsp;<button class=\"btn btn-secondary btn-sm\" style=\"background: #FF0800;border-color: rgba(255,255,255,0);\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\">                            <path d=\"M2 5H14V7H2V5Z\" fill=\"currentColor\"></path>                                <path d=\"M2 9H14V11H2V9Z\" fill=\"currentColor\"></path>                                <path d=\"M10 13H2V15H10V13Z\" fill=\"currentColor\"></path><path d=\"M16 9H18V13H22V15H18V19H16V15H12V13H16V9Z\" fill=\"currentColor\"></path></svg></button></h6></div>";
+				    t += "<div class=\"col\">                    <h3 class=\"my-3\" style=\"text-align: center;font-size: 20px;\"></h3><h3 class=\"my-3\" style=\"text-align: center;font-size: 20px;\"><a href=\"home.php?p=book_preview&isbn=" + o[num_books_displayed  + inner_ctr].isbn + "\" style=\"color: rgb(0,0,0);\">" + o[num_books_displayed  + inner_ctr].title + "</a></h3>                    <h3 class=\"my-3\" style=\"text-align: center;font-size: 15px;\"><a href=\"#\" style=\"color: rgb(0,0,0)\">"  + o[num_books_displayed  + inner_ctr].authorName + "</a></h3><h3 class=\"my-3\" style=\"text-align: center;font-size: 15px;color: rgb(66,76,86);\"><a href=\"#\" style=\"color: rgb(0,0,0);\">" + o[num_books_displayed  + inner_ctr].price + "$</a></h3><h6 style=\"text-align: center;\">&nbsp;<button class=\"btn btn-secondary btn-sm\" style=\"background: #FF0800;border-color: rgba(255,255,255,0);text-align: center;\">Buy</button>&nbsp; &nbsp;&nbsp;<button class=\"btn btn-secondary btn-sm\" style=\"background: #FF0800;border-color: rgba(255,255,255,0);\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\" fill=\"none\">                            <path d=\"M2 5H14V7H2V5Z\" fill=\"currentColor\"></path>                                <path d=\"M2 9H14V11H2V9Z\" fill=\"currentColor\"></path>                                <path d=\"M10 13H2V15H10V13Z\" fill=\"currentColor\"></path><path d=\"M16 9H18V13H22V15H18V19H16V15H12V13H16V9Z\" fill=\"currentColor\"></path></svg></button></h6></div>";
 
 
                     // $("#books_result").append(t);
@@ -209,4 +209,47 @@ function display_search_bookpreview_response(x,y,z)
 				t += "<div class=\"row\"></div>";
 				$("#books_result").append(t);
             }
+} 
+
+
+
+
+function select_bookpreview(data) 
+{
+	var data_encoded = {'bookpreview_select_input_query':  JSON.stringify(data)};
+	
+	$.ajax({
+			type: "POST",
+			url: "ajax/components/selects/db_select_bookpreview.php",
+			data: data_encoded,
+			success: display_select_bookpreview_response
+		   });
 }
+
+function display_select_bookpreview_response(x,y,z) 
+{
+            var o = JSON.parse(JSON.parse(x).response);
+            
+            var response_length = o.length;
+            
+            if(response_length != 1)
+            {
+                $("#bookpreview_result").html("Book Not Found");
+                return;
+            }
+            o = o[0];
+
+
+            t = "<div class=\"row\" style=\"padding-top: 100px;\"><div class=\"col-md-8\"><img class=\"img-fluid\" src=\"" + o.displayImage + "\">                <div class=\"user-body\"><span class=\"heading\">Rating</span><span class=\"fa fa-star checked\"></span><span class=\"fa fa-star checked\"></span><span class=\"fa fa-star checked\"></span><span class=\"fa fa-star checked\"></span><span class=\"fa fa-star\"></span>          <p>4.1 average based on 34 reviews.</p>                </div>  </div>";
+
+            t += "<div class=\"col-md-4\">    <h3 class=\"my-3\" style=\"text-align: left;\">Book Description</h3>           <p>" + o.description + "</p><a class=\"stretched-link\" href=\"https://" + o.previewLink + "\" style=\"text-align: left;\">Sneakpeek</a>            <h3 class=\"my-3\">"+  o.price + "$</h3><button class=\"btn btn-primary border rounded\" type=\"button\" style=\"text-align: left;\">Add to Wishlist</button><button class=\"btn btn-primary\" type=\"button\" style=\"text-align: left;\">Add to Cart</button>           <ul class=\"list-unstyled\"></ul>        </div> </div>";
+
+			$("#bookpreview_result").append(t);
+
+            t = "        <h5 class=\"my-4\" style=\"color: var(--bs-blue);height: 49px;font-size: 30px;text-align: left;\">Reviews</h5>            <div class=\"row row-cols-1\">                <div class=\"col-sm-6 col-md-3 mb-4\"><a href=\"#\"></a><input class=\"form-control-plaintext\" type=\"text\" value=\"Review 1\" readonly=\"\"></div>                <div class=\"col-sm-6 col-md-3 mb-4\"><a href=\"#\"></a><input class=\"form-control-plaintext\" type=\"text\" value=\"Review 2\" readonly=\"\"></div>                <div class=\"col-sm-6 col-md-3 mb-4\"><a href=\"#\"></a><input class=\"form-control-plaintext\" type=\"text\" value=\"Review 3\" readonly=\"\"></div>                <div class=\"col-sm-6 col-md-3 mb-4\" style=\"padding-top: 0px;\"><input class=\"form-control-plaintext\" type=\"text\" value=\"Review 4\" readonly=\"\"><a href=\"#\"></a></div>            </div>";
+
+			$("#bookpreview_result").append(t);
+} 
+
+
+
