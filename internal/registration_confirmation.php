@@ -1,4 +1,2 @@
 <?php
-// print "Welcome $_SESSION[username]";
-echo "welcome!";
-?>
+include "internal/thank_you/index.html"; ?>
