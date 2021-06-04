@@ -183,20 +183,19 @@ include "../debug/chromephp-master/ChromePhp.php";
         add_discounts(data); 
     }
 
-    function add_to_ratings()
+    function add_to_ratings(bookId_json, customerId)
     {
+        var Id_id = "Id_insert";
+        var Id = $("#"+ Id_id).val();
         var rating_id = "rating_insert";
         var rating = $("#"+ rating_id).val();
-        var bookId_id = "bookId_insert";
-        var bookId = $("#"+bookId_id).val();
-        var customerId_id = "customerId_insert";
-        var customerId = $("#"+customerId_id).val();
         var dateUpdated_id = "dateUpdated_insert";
-        var dateUpdated = $("#"+ dateUpdated_id).val();        
+        var dateUpdated = $("#"+ dateUpdated_id).val();       
                                 
-        var data = {"customerId": parseInt(customerID),
-                    "bookId": bookId, 
+        var data = {"id": Id,
                     "rating": rating,
+                    "bookId": bookId_json,
+                    "customerId": customerId,
                     "dateUpdated": dateUpdated
                     };
         // Calls below function in the ajax/ajax.js file
@@ -331,40 +330,6 @@ include "../debug/chromephp-master/ChromePhp.php";
 // ======================================================
 // JS functions for selecting rows from the database 
 // =======================================================
-function select_from_bookpreview(id, queryBy)
-        {                        
-            var key = queryBy
-            var data = {"queryBy": queryBy.toString()}; 
-            
-            if(key != "isbn")
-            {
-                data[key] = parseInt(id);
-            }
-            else
-            {
-                data[key] = id;
-            }
-
-            // Calls below function in the ajax/ajax.js file 
-            show_bookpreview(data);
-        }
-
-
-    function search_select_from_bookpreview()
-    {
-        var query = $("#bookpreview_search_select").val();
-        var data = {"query": query,
-                    "orderBy" : $("#bookpreview_search_select_orderBy").val(),
-                    "limit": parseInt($("#bookpreview_search_select_limit").val()),
-                    "offset": parseInt($("#bookpreview_search_select_offset").val())
-        };
-
-        // Calls below function in the ajax/ajax.js file 
-        search_bookpreview(data); 
-    }
-
-
-
     function select_from_cart(customerid)
         {                        
             var data = {"customerid": customerid};
@@ -567,7 +532,7 @@ function select_from_bookpreview(id, queryBy)
     <p>Existing customerid = $customerid</p>
     <p>Existing discountid = $discountid</p>
              </form>
-            <button onclick=\"add_to_customerdiscounts($customerid, $discountId)\">Submit</button>";
+            <button onclick=\"add_to_customerdiscounts($customerId, $discountId)\">Submit</button>";
     
     echo "<p id=\"add_to_customerdiscounts_response\"></p>";
 
@@ -591,27 +556,29 @@ function select_from_bookpreview(id, queryBy)
     
     echo "<p id=\"add_to_discounts_response\"></p>";
 
-
-    $id = "1"; 
-    $customerId = "1";
+ 
+//    $id = "1";
     $bookId = "1234567891012";
     $bookId_json = "'1234567891012'";
-    
+    $customerId = "1";
+
     echo "<h2>Table: Ratings</h2>";
     print "<h3>Via Form</h3>
-    <p>Existing id = $id</p>
-    <p>Existing customerid = $customerid</p>
-    <p>Existing bookid = $bookid</p>
-  
+    <p>Existing bookId = $bookId</p>
+    <p>Existing customerId = $customerId</p>
+
              <form>
+             <label>Ratings_Id</label>
+             <input type=\"number\" name=\"Id\" id=\"Id_insert\"><br>
              <label>Ratings_rating</label>
-             <input type=\"text\" name=\"rating\" id=\"rating_insert\"><br>
+             <input type=\"number\" name=\"rating\" step=\".01\" id=\"rating_insert\"><br>
              <label>Ratings_dateUpdated</label>
-             <input type=\"text\" name=\"dateUpdated\" id=\"dateUpdated_insert\"><br>
+             <input type=\"date\" name=\"dateUpdated\" id=\"dateUpdated_insert\"><br>
              </form>
-            <button onclick=\"add_to_ratings\">Submit</button>";
+            <button onclick=\"add_to_ratings($bookId_json, $customerId)\">Submit</button>";
     
     echo "<p id=\"add_to_ratings_response\"></p>";
+
 
     $id = "1";
     $ratingid = "1";
@@ -739,7 +706,7 @@ function select_from_bookpreview(id, queryBy)
             <p>Existing ratingid = $customerid</p>
 
             <form>
-                New rating: <input type=\"text\" name=\"rating\"id=\"rating_updated\"><br>
+                New rating: <input type=\"number\" name=\"rating\step=\".01\" id=\"rating_updated\"><br>
                 New dateUpdated: <input type=\"date\" name=\"dateUpdated\" id=\"dateUpdated_updated\"><br>
         
             </form>
@@ -849,21 +816,6 @@ function select_from_bookpreview(id, queryBy)
         <button onclick=\"select_from_reviews($id)\">Submit</button>";
 
     echo "<p id=\"select_from_reviews_response\"></p>";
-
-
-    echo "<h2>Table: Search BookPreview</h2>";
-    print "<h3>Via Button with pre-defined values</h3>
-            <form>
-                New Query: <input type=\"text\" name=\"type\" id=\"bookpreview_search_select\"><br>
-                New orderBy: <input type=\"text\" name=\"type\" id=\"bookpreview_search_select_orderBy\"><br>
-                New offset: <input type=\"number\" name=\"type\" id=\"bookpreview_search_select_offset\"><br>
-                New limit: <input type=\"number\" name=\"type\" id=\"bookpreview_search_select_limit\"><br>
-            </form>
-            <button onclick=\"search_select_from_bookpreview()\">Submit</button>";
-
-    echo "<p id=\"search_select_from_bookpreview_response\"></p>";
-
-
 
     ?>
 
