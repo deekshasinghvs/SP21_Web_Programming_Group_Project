@@ -31,7 +31,7 @@ if( ! isset($_SESSION['is_admin'])) {
     <script> 
 
     $(function(){
-      // $("#section").load("internal/home/index.html");  
+      $("#header2").load("internal/header2.php");  
       $("#footer").load("internal/footer.php"); 
       // $("#section").load("internal/" + $("#section_name").val() + ".php"); 
     });
@@ -94,6 +94,8 @@ if( ! isset($_SESSION['is_admin'])) {
       
     ?>
 
+    
+    <div id="header2"></div>
     <div id="section">
       <?php
       if( ! isset($_REQUEST['p'])) 
