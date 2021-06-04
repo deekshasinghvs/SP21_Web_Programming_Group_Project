@@ -108,15 +108,14 @@ if( ! isset($_SESSION['is_admin'])) {
 
       // $pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
 
-      $pages = array('blog','home','login','logout','myinfo','contact','books','cart','catinfo','add_cart','empty_cart','buy_cart', 'search');
+      $pages = array('blog','home','login','logout','myinfo','contact','cart','catinfo','add_cart','empty_cart','buy_cart', 'search');
 
 
       if(isset($_REQUEST['query']) && $_REQUEST['p']=='search') 
       {
         $_REQUEST['query'] = "'" . $_REQUEST['query'] . "'";
-        require_once "internal/search.php";
+        require "internal/search.php";
       }
-
 
       $ok=false;
       foreach($pages as $pp) {
@@ -125,8 +124,16 @@ if( ! isset($_SESSION['is_admin'])) {
           $ok=true;
         }
       }
+      if($_REQUEST['p']=='books') 
+      {
+        $_REQUEST['orderBy'] = "'title'";
+        require "internal/search.php";
+        $ok=true;
+      }
+      
+
       if(! $ok) {
-        print "Page does not exists";
+        print "404 Page does not exist";
       }
     ?>
     </div>

@@ -1,5 +1,9 @@
 <?php 
-$query = $_REQUEST["query"];
+$query = "'a'";
+if(isset($_REQUEST["query"]))
+{
+    $query = $_REQUEST["query"];
+}
 $orderBy = "null";
 if(isset($_REQUEST["orderBy"]))
 {
