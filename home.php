@@ -67,7 +67,7 @@ if( ! isset($_SESSION['is_admin'])) {
 
   <body> 
     <?php
-      $_SESSION['username'] = "?";
+      // $_SESSION['username'] = "?";
       $_SESSION['is_admin'] = 0;
       
       $header_type = "";
@@ -108,7 +108,7 @@ if( ! isset($_SESSION['is_admin'])) {
 
       // $pages = array('blog','home','shopinfo','login','do_login','after_login','logout','myinfo','contact','books','cart','catinfo','productinfo','add_cart','empty_cart','buy_cart');
 
-      $pages = array('blog','home','login','logout','myinfo','contact','cart','catinfo','add_cart','empty_cart','buy_cart', 'search', 'editorspicks', 'registration');
+      $pages = array('blog','home','login','logout','myinfo','contact','cart','catinfo','add_cart','empty_cart','buy_cart', 'search', 'editorspicks', 'registration', 'thank_you', 'review', 'page_not_found');
 
 
       if(isset($_REQUEST['query']) && $_REQUEST['p']=='search') 
@@ -163,13 +163,13 @@ if( ! isset($_SESSION['is_admin'])) {
 
         }
 
-        require_once "internal/register.php";
+        require "internal/register.php";
         $ok = true;
       }
 
 
       if(! $ok) {
-        print "404 Page does not exist";
+        require "internal/page_not_found.php";
       }
     ?>
     </div>
